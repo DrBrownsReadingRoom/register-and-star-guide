@@ -39,7 +39,7 @@ function NavLinks({ onNavigate, row }: { onNavigate?: () => void; row?: boolean 
       {NAV.map((item) => (
         <li key={item.label}>
           {"to" in item ? (
-            <Link to={item.to} className={cls} activeProps={act} activeOptions={{ exact: item.exact }} onClick={onNavigate}>
+            <Link to={item.to} className={cls} activeProps={act} activeOptions={{ exact: !!item.exact }} onClick={onNavigate}>
               {item.label}
             </Link>
           ) : (

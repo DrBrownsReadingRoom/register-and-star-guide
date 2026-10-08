@@ -3,7 +3,7 @@ import { PageIntro } from "@/components/site/PageIntro";
 import { Catalogue } from "@/components/site/Catalogue";
 
 export const Route = createFileRoute("/essays/")({
-  validateSearch: (s: Record<string, unknown>): { focus?: number } => (s.focus ? { focus: 1 } : {}),
+  validateSearch: (s: Record<string, unknown>): { focus?: number } => (s["focus"] ? { focus: 1 } : {}),
   head: () => ({
     meta: [
       { title: "The Catalogue — The Reading Room" },
