@@ -1,24 +1,25 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { PageIntro } from "@/components/site/PageIntro";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "The Reading Room — Essays by David Rees Brown" },
+      { name: "description", content: "A private reading room of essays on science, philosophy and reflection by David Rees Brown, with Claude." },
+      { property: "og:title", content: "The Reading Room — Essays by David Rees Brown" },
+      { property: "og:description", content: "Essays on science, philosophy and reflection, shelved for the curious reader." },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <PageIntro label="The Room" title="A quiet room for difficult questions">
+      <p>Essays on science, philosophy and the examined life. Take a chair; the shelves are open.</p>
+      <Link to="/essays" className="rr-btn rr-btn-primary mt-8">
+        Browse the catalogue <span className="rr-arrow" aria-hidden="true">→</span>
+      </Link>
+    </PageIntro>
   );
 }
