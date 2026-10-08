@@ -1,7 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { SHELVES } from "@/config/site";
-import { PageIntro } from "@/components/site/PageIntro";
-import { Catalogue } from "@/components/site/Catalogue";
+import { Catalogue, CatalogueTop } from "@/components/site/Catalogue";
 
 export const Route = createFileRoute("/shelves/$shelf")({
   loader: ({ params }) => {
@@ -15,7 +14,7 @@ export const Route = createFileRoute("/shelves/$shelf")({
     return {
       meta: [
         { title: `${name} shelf — The Reading Room` },
-        { name: "description", content: `Essays on ${name.toLowerCase()} by David Rees Brown.` },
+        { name: "description", content: `Essays filed on the ${name} shelf, by David Rees Brown.` },
         { property: "og:title", content: `The ${name} shelf — The Reading Room` },
         { property: "og:description", content: `Essays shelved under ${name.toLowerCase()}.` },
       ],
@@ -28,7 +27,7 @@ function ShelfPage() {
   const { shelf } = Route.useLoaderData();
   return (
     <>
-      <PageIntro label="Shelf" title={shelf.name} />
+      <CatalogueTop />
       <Catalogue shelf={shelf.slug} />
     </>
   );
