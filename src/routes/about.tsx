@@ -1,13 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SITE } from "@/config/site";
+import { BIO_ASK_LEAD, BIO_BODY, BIO_LEAD, BIO_QUESTION, BIO_SHORT } from "@/content/bio";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About David Rees Brown — The Reading Room" },
-      { name: "description", content: "David Rees Brown writes short essays on the open problems of physics, with Claude doing the groundwork." },
+      { name: "description", content: BIO_SHORT },
       { property: "og:title", content: "About David Rees Brown" },
-      { property: "og:description", content: "An Irishman in America who writes essays on the open problems of physics, with Claude." },
+      { property: "og:description", content: BIO_SHORT },
     ],
   }),
   component: AboutPage,
@@ -31,8 +32,10 @@ function AboutPage() {
       <div className="about-text">
         <p className="label gold">About David</p>
         <h1>David Rees Brown</h1>
-        <p className="lead">An Irishman living in America who deals horses for pleasure and writes short essays on the open problems of physics for anyone who has ever wondered whether the experts are overcomplicating things.</p>
-        <p>David describes himself as “pro thought over pro data.” His essays are opinion pieces, not dissertations: they point out that all science, like all life, is approximate, subjective and shaped by who pays for it.</p>
+        <p className="lead">{BIO_LEAD}</p>
+        {BIO_BODY.map((para) => <p key={para.slice(0, 28)}>{para}</p>)}
+        <p className="bio-ask">{BIO_ASK_LEAD}</p>
+        <blockquote className="pull">{BIO_QUESTION}</blockquote>
         <h2 style={{ fontSize: 30, fontWeight: 500, marginTop: 44 }}>How the essays are made</h2>
         <ol className="method">
           {METHOD.map(([t, d]) => (
