@@ -4,28 +4,29 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
-
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-4xl: 0;
+  --radius: 0;
+
+  --color-navy: var(--rr-navy);
+  --color-navy2: var(--rr-navy-2);
+  --color-gold: var(--rr-gold);
+  --color-goldInk: var(--rr-gold-ink);
+  --color-ivory: var(--rr-ivory);
+  --color-parchment: var(--rr-parchment);
+  --color-slate: var(--rr-slate);
+  --color-timber: var(--rr-timber);
+
+  --font-display: "Bodoni Moda", Didot, "Times New Roman", serif;
+  --font-reading: "Source Serif 4", Georgia, serif;
+  --font-ui: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -62,83 +63,144 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-}
+  --rr-navy: #071d30;
+  --rr-navy-2: #0d2a43;
+  --rr-gold: #b18b49;
+  --rr-gold-ink: #7e5f28;
+  --rr-ivory: #f9f7f0;
+  --rr-parchment: #ede6d7;
+  --rr-slate: #40515b;
+  --rr-timber: #3b2a1d;
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --background: var(--rr-ivory);
+  --foreground: var(--rr-navy);
+  --card: var(--rr-ivory);
+  --card-foreground: var(--rr-navy);
+  --popover: var(--rr-ivory);
+  --popover-foreground: var(--rr-navy);
+  --primary: var(--rr-navy);
+  --primary-foreground: var(--rr-ivory);
+  --secondary: var(--rr-parchment);
+  --secondary-foreground: var(--rr-navy);
+  --muted: var(--rr-parchment);
+  --muted-foreground: var(--rr-slate);
+  --accent: var(--rr-parchment);
+  --accent-foreground: var(--rr-navy);
+  --destructive: #7a2a1d;
+  --destructive-foreground: var(--rr-ivory);
+  --border: color-mix(in srgb, var(--rr-navy) 14%, transparent);
+  --input: color-mix(in srgb, var(--rr-navy) 40%, transparent);
+  --ring: var(--rr-gold);
+  --chart-1: var(--rr-navy);
+  --chart-2: var(--rr-gold);
+  --chart-3: var(--rr-slate);
+  --chart-4: var(--rr-gold-ink);
+  --chart-5: var(--rr-timber);
+  --sidebar: var(--rr-ivory);
+  --sidebar-foreground: var(--rr-navy);
+  --sidebar-primary: var(--rr-navy);
+  --sidebar-primary-foreground: var(--rr-ivory);
+  --sidebar-accent: var(--rr-parchment);
+  --sidebar-accent-foreground: var(--rr-navy);
+  --sidebar-border: color-mix(in srgb, var(--rr-navy) 14%, transparent);
+  --sidebar-ring: var(--rr-gold);
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
+    border-radius: 0;
   }
-
+  html {
+    scroll-behavior: smooth;
+  }
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--rr-ivory);
+    color: var(--rr-navy);
+    font-family: var(--font-reading);
+    font-size: 19px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
   }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+  a {
+    color: inherit;
+  }
+  :focus-visible {
+    outline: 2px solid var(--rr-gold);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--rr-parchment);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility rr-label {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+@utility rr-link {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 150ms;
+  &:hover {
+    text-decoration-color: var(--rr-gold);
+  }
+}
+
+@utility rr-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 14px 22px;
+  border: 1px solid var(--rr-navy);
+  box-shadow: inset 0 -2px 0 transparent;
+  transition: background-color 150ms, box-shadow 150ms;
+  text-decoration: none;
+  & .rr-arrow {
+    display: inline-block;
+    transition: transform 150ms;
+  }
+  &:hover .rr-arrow {
+    transform: translateX(3px);
+  }
+  &:hover {
+    box-shadow: inset 0 -2px 0 var(--rr-gold);
+  }
+}
+
+@utility rr-btn-primary {
+  background: var(--rr-navy);
+  color: var(--rr-ivory);
+  &:hover {
+    background: var(--rr-navy-2);
+  }
+}
+
+@utility rr-btn-secondary {
+  background: var(--rr-ivory);
+  color: var(--rr-navy);
 }

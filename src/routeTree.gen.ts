@@ -10,33 +10,92 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as BooksRouteImport } from './routes/books'
+import { Route as EssaysIndexRouteImport } from './routes/essays.index'
+import { Route as EssaysSlugRouteImport } from './routes/essays.$slug'
+import { Route as ShelvesShelfRouteImport } from './routes/shelves.$shelf'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BooksRoute = BooksRouteImport.update({
+  id: '/books',
+  path: '/books',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EssaysIndexRoute = EssaysIndexRouteImport.update({
+  id: '/essays/',
+  path: '/essays/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EssaysSlugRoute = EssaysSlugRouteImport.update({
+  id: '/essays/$slug',
+  path: '/essays/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShelvesShelfRoute = ShelvesShelfRouteImport.update({
+  id: '/shelves/$shelf',
+  path: '/shelves/$shelf',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/books': typeof BooksRoute
+  '/essays/$slug': typeof EssaysSlugRoute
+  '/shelves/$shelf': typeof ShelvesShelfRoute
+  '/essays/': typeof EssaysIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/books': typeof BooksRoute
+  '/essays/$slug': typeof EssaysSlugRoute
+  '/shelves/$shelf': typeof ShelvesShelfRoute
+  '/essays': typeof EssaysIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/books': typeof BooksRoute
+  '/essays/$slug': typeof EssaysSlugRoute
+  '/shelves/$shelf': typeof ShelvesShelfRoute
+  '/essays/': typeof EssaysIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/about' | '/books' | '/essays/$slug' | '/shelves/$shelf' | '/essays/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    '/' | '/about' | '/books' | '/essays/$slug' | '/shelves/$shelf' | '/essays'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/books'
+    | '/essays/$slug'
+    | '/shelves/$shelf'
+    | '/essays/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  BooksRoute: typeof BooksRoute
+  EssaysSlugRoute: typeof EssaysSlugRoute
+  ShelvesShelfRoute: typeof ShelvesShelfRoute
+  EssaysIndexRoute: typeof EssaysIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +107,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/books': {
+      id: '/books'
+      path: '/books'
+      fullPath: '/books'
+      preLoaderRoute: typeof BooksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/essays/': {
+      id: '/essays/'
+      path: '/essays'
+      fullPath: '/essays/'
+      preLoaderRoute: typeof EssaysIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/essays/$slug': {
+      id: '/essays/$slug'
+      path: '/essays/$slug'
+      fullPath: '/essays/$slug'
+      preLoaderRoute: typeof EssaysSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shelves/$shelf': {
+      id: '/shelves/$shelf'
+      path: '/shelves/$shelf'
+      fullPath: '/shelves/$shelf'
+      preLoaderRoute: typeof ShelvesShelfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  BooksRoute: BooksRoute,
+  EssaysSlugRoute: EssaysSlugRoute,
+  ShelvesShelfRoute: ShelvesShelfRoute,
+  EssaysIndexRoute: EssaysIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
