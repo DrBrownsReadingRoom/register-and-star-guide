@@ -8,3 +8,8 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Architecture
+- Site chrome (Header, SubscribeBand, Footer) is rendered once in `src/routes/__root.tsx` RootShell — so every page, including 404, gets it.
+- Brand tokens live in `src/styles.css` (`--rr-*` vars mapped to Tailwind colors/fonts; radius forced to 0) — Tailwind v4 has no config file.
+- External URLs only in `src/config/site.ts`; essays only in `src/content/essays.ts` — single source for content edits.
