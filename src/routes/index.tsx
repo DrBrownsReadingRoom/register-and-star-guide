@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import logo from "@/assets/reading-room-logo.png.asset.json";
 import { SITE } from "@/config/site";
 import { byNewest, countOn, essayUrl, featuredEssay, fmtMonth } from "@/content/essays";
+import { LETTER } from "@/content/letter";
 import { Reg, Star, StarRule } from "@/components/site/Marks";
 import { Sky, TwoSlitPlate } from "@/components/site/Sky";
 
@@ -121,11 +122,15 @@ function Index() {
             <h2 id="note-h">Why this room exists</h2>
           </div>
           <article className="letter">
-            <p className="open">Come in, and mind the step.</p>
-            <p>I am not a scientist and never will be. I write for the fans, not the players: the people who love the big questions and suspect, as I do, that reality is simpler than the institutions explaining it would like us to think.</p>
-            <p>Each essay starts with a thesis I can’t shake. Claude does the groundwork, I push back on every answer, and what survives the argument ends up on these shelves. Some of it will be wrong. All of it is meant to start a conversation.</p>
-            <blockquote>We fight, we lose, we die, and the next person steps to the line.</blockquote>
-            <p>That is the spirit of the place. Take a seat. Pull down whatever catches your eye.</p>
+            <p className="open">{LETTER.open}</p>
+            {LETTER.paras.map((p) => <p key={p}>{p}</p>)}
+            {LETTER.runs.map((r) => (
+              <p className="run" key={r.lead}>
+                <span className="label gold">{r.lead}</span>
+                {r.body}
+              </p>
+            ))}
+            <p>{LETTER.close}</p>
             <div className="sig"><span className="n">David Rees Brown</span><span className="w">with Claude</span></div>
           </article>
         </div>
