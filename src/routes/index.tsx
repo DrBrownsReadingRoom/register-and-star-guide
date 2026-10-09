@@ -9,8 +9,8 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "The Reading Room — Essays by David Rees Brown" },
-      { name: "description", content: "Essays from the ragged edges of physics and thought by David Rees Brown, with Claude. Written for curious readers rather than the specialists." },
-      { property: "og:title", content: "The Reading Room — The Art of Asking Better Questions" },
+      { name: "description", content: "A private corner of the universe for curious minds and unconventional questions. Essays on science, philosophy and reflection by David Rees Brown, with Claude." },
+      { property: "og:title", content: "The Reading Room — A private corner of the universe" },
       { property: "og:description", content: "Essays on science, philosophy and reflection, shelved for the curious reader." },
     ],
   }),
@@ -36,8 +36,8 @@ function Index() {
         <div className="wrap door-in">
           <div>
             <p className="eyebrow"><i />Science · Philosophy · Discovery</p>
-            <h1>The Art of Asking <em>Better</em> Questions</h1>
-            <p className="lede">Essays from the ragged edges of physics and thought, written for curious readers rather than the specialists.</p>
+            <h1>A private corner of the <em>universe</em></h1>
+            <p className="lede">For curious minds and unconventional questions.</p>
             <div className="actions">
               <Link to="/essays" className="btn btn-primary">Enter the Room <span className="arr" aria-hidden="true">→</span></Link>
               <a href={SITE.substack} {...ext} className="btn btn-ghost">Read on Substack <span aria-hidden="true">↗</span></a>
