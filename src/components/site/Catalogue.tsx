@@ -58,7 +58,6 @@ export function Catalogue({ shelf: initial, focusSearch }: { shelf?: ShelfSlug; 
             <div style={{ minWidth: 0 }}>
               <h2 className="row-title">
                 <Link to="/essays/$slug" params={{ slug: e.slug }}>{e.title}</Link>
-                {e.sample && <span className="meta" style={{ fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase" }}> · sample</span>}
               </h2>
               <p className="ex">{e.excerpt}</p>
               <div className="links">

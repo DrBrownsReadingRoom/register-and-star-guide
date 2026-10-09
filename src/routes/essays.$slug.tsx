@@ -28,6 +28,19 @@ export const Route = createFileRoute("/essays/$slug")({
 
 const ext = { target: "_blank", rel: "noopener" } as const;
 
+const EMPH = /(\*\*[^*]+\*\*|_[^_]+_)/g;
+function inline(text: string) {
+  return text.split(EMPH).map((p, i) =>
+    p.startsWith("**") && p.endsWith("**") ? (
+      <strong key={i}>{p.slice(2, -2)}</strong>
+    ) : p.startsWith("_") && p.endsWith("_") ? (
+      <em key={i}>{p.slice(1, -1)}</em>
+    ) : (
+      p
+    ),
+  );
+}
+
 function Body({ text }: { text: string }) {
   let first = true;
   return (
@@ -52,7 +65,7 @@ function Body({ text }: { text: string }) {
                 <Reg kind={kind} />
               </span>
             )}
-            {m ? b.slice(m[0].length) : b}
+            {inline(m ? b.slice(m[0].length) : b)}
           </p>
         );
       })}

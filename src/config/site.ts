@@ -1,5 +1,5 @@
 export const SITE = {
-  substack: "https://YOUR-PUBLICATION.substack.com",
+  substack: "https://davidrbrown1.substack.com",
   amazonBook: "https://www.amazon.com/dp/YOUR-ASIN",
   amazonKindle: "https://www.amazon.com/dp/YOUR-KINDLE-ASIN",
   amazonAuthor: "https://www.amazon.com/author/YOUR-AUTHOR-ID",

@@ -115,8 +115,8 @@ function Index() {
         </div>
       </section>
 
-      <section className="sec wrap" aria-labelledby="note-h">
-        <div className="note">
+      <section className="sec note-band-sec" aria-labelledby="note-h">
+        <div className="note note-band">
           <div className="side">
             <p className="label gold">A note from David</p>
             <h2 id="note-h">Why this room exists</h2>
@@ -151,7 +151,7 @@ function Index() {
               <h3>{e.title}</h3>
               <p>{e.excerpt}</p>
               <span className="foot">
-                <span className="meta tnum">{fmtMonth(e.date)} · {e.readingMinutes} min{e.sample ? " · sample" : ""}</span>
+                <span className="meta tnum">{fmtMonth(e.date)} · {e.readingMinutes} min</span>
                 <span className="go">Read →</span>
               </span>
             </Link>
