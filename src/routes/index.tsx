@@ -142,7 +142,6 @@ function Index() {
         <div className="sec-head">
           <p className="label gold">Recent reading</p>
           <h2 id="recent-h">New in the catalogue</h2>
-          <p>The latest essays, filed as they arrive. Each one is also published and archived on Substack.</p>
         </div>
         <div className="cards">
           {recent.map((e) => (
