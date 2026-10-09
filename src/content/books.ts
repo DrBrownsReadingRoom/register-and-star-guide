@@ -26,14 +26,4 @@ export const BOOKS: Book[] = [
     amazonUrl: SITE.amazonBook,
     kindleUrl: SITE.amazonKindle,
   },
-  {
-    title: "A general-readership science book",
-    subtitle: "",
-    description:
-      "A longer project built from the essays and a great deal of unpublished material: history at its heart, credit given to the giants whose ideas we inherited, and an argument that looking through different windows can still produce new science. Written by David, with Claude filling in the science.",
-    formats: [],
-    year: "",
-    publisher: "",
-    status: "in-preparation",
-  },
 ];
