@@ -69,7 +69,7 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-navy/14 bg-ivory/96">
+    <header className="sticky top-0 z-40 border-b border-navy/14 bg-ivory">
       <div className="mx-auto flex h-[68px] max-w-[1280px] items-center justify-between gap-6 px-6">
         <Link to="/" className="flex items-center gap-3 text-navy no-underline" aria-label="The Reading Room — home">
           <Emblem className="h-7 w-7" />
