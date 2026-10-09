@@ -112,6 +112,12 @@ a.spine:hover,a.spine:focus-visible{transform:translateY(-14px);box-shadow:inset
 .letter .run{margin-top:1.7em;padding-top:16px;border-top:1px solid rgba(177,139,73,.42)}
 .letter .run>.label{display:block;margin-bottom:9px}
 @media (max-width:860px){.note{grid-template-columns:1fr}}
+/* Horizontal band variant: heading above, letter across the full page width */
+.note-band{grid-template-columns:1fr;gap:0}
+.note-band .side{margin-bottom:clamp(22px,3vw,34px)}
+.note-band .side h2{max-width:26ch}
+.note-band .letter p{font-size:20px;line-height:1.62;max-width:94ch}
+.note-band .letter .open{font-size:28px;line-height:1.28}
 
 /* ---------- index cards ---------- */
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
