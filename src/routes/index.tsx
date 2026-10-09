@@ -119,7 +119,7 @@ function Index() {
         <div className="note note-band">
           <div className="side">
             <p className="label gold">A note from David</p>
-            <h2 id="note-h">Why this room exists</h2>
+            <h2 id="note-h">Why The Reading Room exists</h2>
           </div>
           <article className="letter">
             <p className="open">{LETTER.open}</p>
