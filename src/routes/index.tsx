@@ -23,7 +23,7 @@ const plural = (n: number) => `${n} ${n === 1 ? "essay" : "essays"}`;
 
 function Index() {
   const feat = featuredEssay();
-  const recent = byNewest.slice(0, 3);
+  const recent = byNewest.filter((e) => e.slug !== "welcome-to-the-reading-room").slice(0, 3);
   const shelfName = { science: "Science", philosophy: "Philosophy", reflections: "Reflections" };
 
   return (
