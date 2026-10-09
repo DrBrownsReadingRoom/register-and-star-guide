@@ -151,7 +151,7 @@ function Index() {
               <h3>{e.title}</h3>
               <p>{e.excerpt}</p>
               <span className="foot">
-                <span className="meta tnum">{fmtMonth(e.date)} · {e.readingMinutes} min{e.sample ? " · sample" : ""}</span>
+                <span className="meta tnum">{fmtMonth(e.date)} · {e.readingMinutes} min</span>
                 <span className="go">Read →</span>
               </span>
             </Link>
