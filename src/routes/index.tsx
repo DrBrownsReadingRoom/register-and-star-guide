@@ -116,7 +116,7 @@ function Index() {
       </section>
 
       <section className="sec wrap" aria-labelledby="note-h">
-        <div className="note">
+        <div className="note note-band">
           <div className="side">
             <p className="label gold">A note from David</p>
             <h2 id="note-h">Why this room exists</h2>
