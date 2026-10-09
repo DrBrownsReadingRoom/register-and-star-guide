@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BOOKS } from "@/content/books";
-import { SITE, substackSubscribe } from "@/config/site";
+import { SITE } from "@/config/site";
 import { Emblem } from "@/components/site/Emblem";
 
 export const Route = createFileRoute("/books")({
@@ -19,7 +19,6 @@ const ext = { target: "_blank", rel: "noopener" } as const;
 
 function BooksPage() {
   const available = BOOKS.filter((b) => b.status === "available");
-  const workshop = BOOKS.filter((b) => b.status !== "available");
   return (
     <div className="wrap">
       {available.map((b, i) => (
@@ -56,19 +55,6 @@ function BooksPage() {
             <p className="meta mt-4">Or see every title on <a href={SITE.amazonAuthor} {...ext}>David’s Amazon author page</a>.</p>
           </div>
         </div>
-      ))}
-      {workshop.map((b) => (
-        <section key={b.title} className="workshop" aria-label={b.title}>
-          <p className="label gold">In the workshop</p>
-          <div>
-            <span className="status">{b.status === "forthcoming" ? "Forthcoming" : "In preparation"}</span>
-            <h2 style={{ marginTop: 18 }}>{b.title}</h2>
-            <p>{b.description}</p>
-            <p className="meta" style={{ marginTop: 18 }}>
-              Subscribe on Substack to hear when it is ready. <a href={substackSubscribe} {...ext}>Subscribe ↗</a>
-            </p>
-          </div>
-        </section>
       ))}
     </div>
   );
