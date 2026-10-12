@@ -74,7 +74,11 @@ export function Catalogue({ shelf: initial, focusSearch }: { shelf?: ShelfSlug; 
           </li>
         ))}
         {list.length === 0 && (
-          <li className="empty">Nothing on this shelf matches “{q}”. Try another word or open all shelves.</li>
+          <li className="empty">
+            {term
+              ? `Nothing on this shelf matches “${q}”. Try another word or open all shelves.`
+              : "Nothing shelved here yet. New essays arrive slowly."}
+          </li>
         )}
       </ol>
       <div className="flex flex-wrap items-center justify-between gap-4 pb-24 pt-14">

@@ -14,3 +14,4 @@
 - Brand tokens live in `src/styles.css` (`--rr-*` vars mapped to Tailwind colors/fonts; radius forced to 0) — Tailwind v4 has no config file.
 - External URLs only in `src/config/site.ts`; essays only in `src/content/essays.ts`; David's supplied biography wording only in `src/content/bio.ts`; David's supplied homepage letter wording only in `src/content/letter.ts` — single source for content edits.
 - Page styling is ported from the client's reference kit into `src/kit.css` (plain class names inside `@layer components`) — keeps pages matching the approved reference; books live in `src/content/books.ts`.
+- `src/content/essays.ts` lists only posts currently live on Substack, so the site never advertises writing David has withdrawn; text of withdrawn posts is kept out of the build in `src/content/essays.unpublished.md`.

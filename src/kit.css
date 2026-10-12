@@ -19,7 +19,7 @@
 .plaque img{width:min(560px,92%)}
 .door{position:relative;background:var(--navy);color:var(--ivory);overflow:hidden;isolation:isolate}
 .door canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
-.door-in{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:48px;align-items:end;padding-block:clamp(56px,9vw,112px)}
+.door-in{display:grid;grid-template-columns:1fr;align-items:end;padding-block:clamp(56px,9vw,112px)}
 .door .eyebrow{font:600 12px/1 var(--font-ui);letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px}
 .door .eyebrow i{display:block;width:40px;height:1px;background:var(--gold)}
 .door h1{font-size:clamp(44px,6.6vw,80px);font-weight:600;color:var(--ivory);margin-top:22px;max-width:12ch}
@@ -30,9 +30,6 @@
 .door .btn-primary:hover{background:#fff;border-color:var(--gold)}
 .door .btn-ghost{background:transparent;color:var(--ivory);border-color:rgba(249,247,240,.4)}
 .door .btn-ghost:hover{border-color:var(--gold)}
-.chart-note{justify-self:end;max-width:280px;border-left:1px solid rgba(177,139,73,.55);padding-left:18px;font:400 14px/1.55 var(--font-ui);color:rgba(249,247,240,.72)}
-.chart-note b{display:block;font:600 11px/1 var(--font-ui);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-@media (max-width:860px){.door-in{grid-template-columns:1fr}.chart-note{justify-self:start}}
 
 /* ---------- section scaffolding ---------- */
 .sec{padding-block:clamp(64px,9vw,112px)}
@@ -79,6 +76,7 @@
 .spine .c{font:600 11px/1.2 var(--font-ui);letter-spacing:.12em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg)}
 .spine .em{width:22px;height:22px}
 a.spine:hover,a.spine:focus-visible{transform:translateY(-14px);box-shadow:inset -6px 0 10px -6px rgba(0,0,0,.35),0 14px 20px -12px rgba(7,29,48,.55)}
+.spine.is-quiet{opacity:.45}
 .sp-navy{background:var(--navy);color:var(--gold);width:88px;height:340px}
 .sp-navy .t{color:var(--ivory)}
 .sp-ivory{background:var(--ivory);color:var(--navy);width:80px;height:310px;border:1px solid rgba(7,29,48,.25);border-bottom:0}
