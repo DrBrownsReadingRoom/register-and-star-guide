@@ -109,3 +109,39 @@ export function TwoSlitPlate() {
     </svg>
   );
 }
+
+/** Line engraving of swells rising, breaking at a mark, and running flat to the shore. */
+export function WavePlate() {
+  const W = 600, H = 420, shore = 522, brk = 412;
+  const swell = [];
+  const run = [];
+  const crests = [];
+  for (let i = 0; i < 14; i++) {
+    const y0 = 42 + i * 26, ph = i * 0.85;
+    const a: string[] = [], b: string[] = [];
+    for (let x = 26; x <= brk; x += 6) {
+      const g = (x - 26) / (brk - 26);
+      a.push(`${x},${(y0 + Math.sin(x / 30 + ph) * (2 + g * 13)).toFixed(1)}`);
+    }
+    for (let x = brk; x <= shore; x += 6) {
+      const d = 1 - (x - brk) / (shore - brk);
+      b.push(`${x},${(y0 + Math.sin(brk / 30 + ph) * 15 * d * d).toFixed(1)}`);
+    }
+    swell.push(<polyline key={"s" + i} points={a.join(" ")} />);
+    run.push(<polyline key={"r" + i} points={b.join(" ")} />);
+    crests.push(<circle key={"c" + i} cx={brk} cy={y0 + Math.sin(brk / 30 + ph) * 15} r="2" />);
+  }
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Line engraving of swells rising, breaking at a mark, and running flat to the shore">
+      <g fill="none" stroke="#071D30" strokeWidth="1" opacity=".62">{swell}</g>
+      <g fill="none" stroke="#071D30" strokeWidth="1" opacity=".3">{run}</g>
+      <g fill="#B18B49">{crests}</g>
+      <line x1={shore} y1="24" x2={shore} y2={H - 24} stroke="#071D30" strokeWidth="2" />
+      <g fontFamily="Bodoni Moda, Georgia, serif" fontStyle="italic" fontSize="15" fill="#40515B">
+        <text x="30" y="36">a.</text>
+        <text x={brk - 8} y="36">b.</text>
+        <text x={shore + 12} y={H - 30}>c.</text>
+      </g>
+    </svg>
+  );
+}
