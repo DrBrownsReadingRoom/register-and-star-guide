@@ -44,10 +44,6 @@ function Index() {
               <a href={SITE.substack} {...ext} className="btn btn-ghost">Read on Substack <span aria-hidden="true">↗</span></a>
             </div>
           </div>
-          <p className="chart-note">
-            <b>On the chart behind this page</b>
-            The celestial grid is drawn to the old convention: right ascension in hours around the rim, declination in rings toward the pole. Maps like this were how people first asked where they stood.
-          </p>
         </div>
       </div>
 
