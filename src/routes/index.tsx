@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import logo from "@/assets/reading-room-logo.png.asset.json";
-import { SITE } from "@/config/site";
+import { SITE, type ShelfSlug } from "@/config/site";
 import { byNewest, countOn, essayUrl, featuredEssay, fmtMonth } from "@/content/essays";
 import { LETTER } from "@/content/letter";
 import { Reg, Star, StarRule } from "@/components/site/Marks";
-import { Sky, TwoSlitPlate } from "@/components/site/Sky";
+import { Sky, TwoSlitPlate, WavePlate } from "@/components/site/Sky";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,9 +21,28 @@ export const Route = createFileRoute("/")({
 const ext = { target: "_blank", rel: "noopener" } as const;
 const plural = (n: number) => `${n} ${n === 1 ? "essay" : "essays"}`;
 
+/** A shelf spine: a link when the shelf holds essays, a quiet marker while it is empty. */
+function ShelfSpine({ shelf, cls, star }: { shelf: ShelfSlug; cls: string; star: string }) {
+  const n = countOn(shelf);
+  const name = shelf.charAt(0).toUpperCase() + shelf.slice(1);
+  const inner = (
+    <>
+      <span className="band" /><Star fill={star} className="em" />
+      <span className="t">{name}</span>
+      <span className="c tnum">{n ? plural(n) : "Coming soon"}</span>
+      <span className="band" />
+    </>
+  );
+  return n ? (
+    <Link to="/shelves/$shelf" params={{ shelf }} className={`spine ${cls}`}>{inner}</Link>
+  ) : (
+    <span className={`spine is-quiet ${cls}`} aria-disabled="true">{inner}</span>
+  );
+}
+
 function Index() {
   const feat = featuredEssay();
-  const recent = byNewest.filter((e) => e.slug !== "welcome-to-the-reading-room").slice(0, 3);
+  const recent = byNewest.filter((e) => e.slug !== feat.slug && e.slug !== "welcome-to-the-reading-room").slice(0, 3);
   const shelfName = { science: "Science", philosophy: "Philosophy", reflections: "Reflections" };
 
   return (
@@ -50,8 +69,8 @@ function Index() {
       <section className="sec wrap" aria-labelledby="feat-h">
         <div className="featured">
           <figure className="plate" style={{ margin: 0 }}>
-            <div className="plate-in"><TwoSlitPlate /></div>
-            <figcaption><span>Plate I</span><span>Two openings, one stubborn question.</span></figcaption>
+            <div className="plate-in">{feat.plateArt === "waves" ? <WavePlate /> : <TwoSlitPlate />}</div>
+            <figcaption><span>Plate I</span><span>{feat.plate ?? "Two openings, one stubborn question."}</span></figcaption>
           </figure>
           <div className="feat-text">
             <div className="callno">
@@ -61,7 +80,7 @@ function Index() {
             <h2 id="feat-h" className="feat-title">
               <Link to="/essays/$slug" params={{ slug: feat.slug }} style={{ textDecoration: "none" }}>{feat.title}</Link>
             </h2>
-            <p className="tease">Physics tells us that the stuff of the world dissolves, on close inspection, into probability and field. This essay asks the plain question nobody at the pub will let go of: if matter is not material, what exactly is holding up the table?</p>
+            <p className="tease">{feat.excerpt}</p>
             <p className="byline">David Rees Brown <i>with Claude</i></p>
             <div className="regs" aria-label="Register of this essay">
               {feat.register.map((r) => <Reg key={r} kind={r} />)}
@@ -84,16 +103,10 @@ function Index() {
           </div>
           <div className="shelf">
             <span className="spine dec d1" aria-hidden="true" />
-            <Link to="/shelves/$shelf" params={{ shelf: "science" }} className="spine sp-navy">
-              <span className="band" /><Star fill="#B18B49" className="em" /><span className="t">Science</span><span className="c tnum">{plural(countOn("science"))}</span><span className="band" />
-            </Link>
+            <ShelfSpine shelf="science" cls="sp-navy" star="#B18B49" />
             <span className="spine dec d2" aria-hidden="true" />
-            <Link to="/shelves/$shelf" params={{ shelf: "philosophy" }} className="spine sp-ivory">
-              <span className="band" /><Star fill="#B18B49" className="em" /><span className="t">Philosophy</span><span className="c tnum">{plural(countOn("philosophy"))}</span><span className="band" />
-            </Link>
-            <Link to="/shelves/$shelf" params={{ shelf: "reflections" }} className="spine sp-slate">
-              <span className="band" /><Star fill="#E7D3A8" className="em" /><span className="t">Reflections</span><span className="c tnum">{plural(countOn("reflections"))}</span><span className="band" />
-            </Link>
+            <ShelfSpine shelf="philosophy" cls="sp-ivory" star="#B18B49" />
+            <ShelfSpine shelf="reflections" cls="sp-slate" star="#E7D3A8" />
             <span className="spine dec d3" aria-hidden="true" />
             <Link to="/books" className="spine sp-gold">
               <span className="band" /><Star fill="#071D30" className="em" /><span className="t">The Books</span><span className="c">On Amazon</span><span className="band" />
@@ -134,28 +147,33 @@ function Index() {
 
       <div className="wrap"><StarRule /></div>
 
-      <section className="sec wrap" aria-labelledby="recent-h">
-        <div className="sec-head">
-          <p className="label gold">Recent reading</p>
-          <h2 id="recent-h">New in the catalogue</h2>
-        </div>
-        <div className="cards">
-          {recent.map((e) => (
-            <Link key={e.slug} to="/essays/$slug" params={{ slug: e.slug }} className="card">
-              <span className="top tnum"><span>RR · {e.no}</span><span className="sh">{shelfName[e.shelf]}</span></span>
-              <h3>{e.title}</h3>
-              <p>{e.excerpt}</p>
-              <span className="foot">
-                <span className="meta tnum">{fmtMonth(e.date)} · {e.readingMinutes} min</span>
-                <span className="go">Read →</span>
-              </span>
-            </Link>
-          ))}
-        </div>
-        <div className="mt-12 flex justify-center">
+      {recent.length > 0 && (
+        <section className="sec wrap" aria-labelledby="recent-h">
+          <div className="sec-head">
+            <p className="label gold">Recent reading</p>
+            <h2 id="recent-h">New in the catalogue</h2>
+          </div>
+          <div className="cards">
+            {recent.map((e) => (
+              <Link key={e.slug} to="/essays/$slug" params={{ slug: e.slug }} className="card">
+                <span className="top tnum"><span>RR · {e.no}</span><span className="sh">{shelfName[e.shelf]}</span></span>
+                <h3>{e.title}</h3>
+                <p>{e.excerpt}</p>
+                <span className="foot">
+                  <span className="meta tnum">{fmtMonth(e.date)} · {e.readingMinutes} min</span>
+                  <span className="go">Read →</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <div className="wrap" style={{ paddingBottom: "clamp(64px,9vw,112px)" }}>
+        <div className="flex justify-center">
           <Link to="/essays" className="btn btn-secondary">Open the full catalogue <span className="arr" aria-hidden="true">→</span></Link>
         </div>
-      </section>
+      </div>
     </>
   );
 }

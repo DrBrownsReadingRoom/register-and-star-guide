@@ -76,6 +76,7 @@
 .spine .c{font:600 11px/1.2 var(--font-ui);letter-spacing:.12em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg)}
 .spine .em{width:22px;height:22px}
 a.spine:hover,a.spine:focus-visible{transform:translateY(-14px);box-shadow:inset -6px 0 10px -6px rgba(0,0,0,.35),0 14px 20px -12px rgba(7,29,48,.55)}
+.spine.is-quiet{opacity:.45}
 .sp-navy{background:var(--navy);color:var(--gold);width:88px;height:340px}
 .sp-navy .t{color:var(--ivory)}
 .sp-ivory{background:var(--ivory);color:var(--navy);width:80px;height:310px;border:1px solid rgba(7,29,48,.25);border-bottom:0}
