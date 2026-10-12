@@ -1,6 +1,5 @@
 import { substackPost, type ShelfSlug } from "@/config/site";
 
-export type Register = "evidence" | "inference" | "speculation";
 
 export interface Essay {
   no: string; // accession number, "001"
@@ -11,21 +10,19 @@ export interface Essay {
   shelf: ShelfSlug;
   date: string; // ISO
   readingMinutes: number;
-  register: Register[];
   featured?: boolean;
   /** Featured-plate engraving and the line under it. */
   plateArt?: "slits" | "waves";
   plate?: string;
   substackUrl?: string;
-  /** Blocks separated by blank lines. "## " = heading, "> " = pull quote,
-   *  a leading [evidence] / [inference] / [speculation] adds a margin mark. */
+  /** Blocks separated by blank lines. "## " = heading, "> " = pull quote. */
   body: string;
   related?: string[];
 }
 
 export const ESSAYS: Essay[] = [
   {
-    no: "001",
+    no: "002",
     slug: "too-much-of-a-good-thing",
     title: "Too Much of a Good Thing",
     dek: "How social media, online news, and the First Amendment are killing democracy",
@@ -33,7 +30,6 @@ export const ESSAYS: Essay[] = [
     shelf: "reflections",
     date: "2026-10-01",
     readingMinutes: 4,
-    register: ["evidence", "inference"],
     featured: true,
     plateArt: "waves",
     plate: "Waves breaking, one by one.",
@@ -71,7 +67,7 @@ In the end, public issues are like waves at sea. One by one, they break on the s
     related: ["welcome-to-the-reading-room"],
   },
   {
-    no: "002",
+    no: "001",
     slug: "welcome-to-the-reading-room",
     title: "Welcome to the Reading Room",
     dek: "Opinion pieces, not proofs. Pull up a chair.",
@@ -79,7 +75,6 @@ In the end, public issues are like waves at sea. One by one, they break on the s
     shelf: "reflections",
     date: "2026-10-07",
     readingMinutes: 3,
-    register: ["inference", "evidence"],
     featured: false,
     body: `I’m not a physicist, and I’ve no intention of becoming one. But I’ve spent a long time watching modern physics from the stands, and here’s what I see. The universe is basically simple. The business of explaining it has become complicated, expensive, and very good at paying the people who do the explaining. Ever since the Manhattan Project turned physics into an industry, the money has flowed to the players. The people paying for it, which is all of us, haven’t seen much return.
 

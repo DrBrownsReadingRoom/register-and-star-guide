@@ -59,12 +59,6 @@
 .feat-text .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 @media (max-width:860px){.featured{grid-template-columns:1fr}}
 
-/* register marks */
-.reg{display:inline-flex;align-items:center;gap:6px;font:500 13px/1 var(--font-ui);color:var(--slate)}
-.reg svg{width:11px;height:11px;flex:none}
-.regs{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
-.legend{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;font:400 14px/1.4 var(--font-ui);color:var(--slate)}
-.legend b{font-weight:600;color:var(--navy);letter-spacing:.14em;text-transform:uppercase;font-size:11px}
 
 /* ---------- shelves ---------- */
 .shelves-band{background:var(--parchment);border-block:1px solid var(--rule)}

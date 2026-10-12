@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { byNewest, essayUrl, fmtMonth } from "@/content/essays";
 import { SHELVES, substackArchive, type ShelfSlug } from "@/config/site";
-import { Reg } from "./Marks";
 
 const ext = { target: "_blank", rel: "noopener" } as const;
 const nameOf = (s: ShelfSlug) => SHELVES.find((x) => x.slug === s)!.name;
@@ -45,12 +44,6 @@ export function Catalogue({ shelf: initial, focusSearch }: { shelf?: ShelfSlug; 
           <input id="q" ref={ref} type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search titles and excerpts" aria-label="Search essays" />
         </label>
       </div>
-      <div className="legend" style={{ paddingBlock: 18, borderBottom: "1px solid var(--rule)" }}>
-        <b>Register</b>
-        <Reg kind="evidence">Evidence: what is measured or documented</Reg>
-        <Reg kind="inference">Inference: what follows from it</Reg>
-        <Reg kind="speculation">Speculation: what might be so</Reg>
-      </div>
       <ol className="ledger">
         {list.map((e) => (
           <li key={e.slug} className="row">
@@ -70,7 +63,6 @@ export function Catalogue({ shelf: initial, focusSearch }: { shelf?: ShelfSlug; 
               <span className="tnum">{fmtMonth(e.date)}</span>
               <span className="tnum">{e.readingMinutes} min read</span>
             </div>
-            <div className="side">{e.register.map((r) => <Reg key={r} kind={r} />)}</div>
           </li>
         ))}
         {list.length === 0 && (

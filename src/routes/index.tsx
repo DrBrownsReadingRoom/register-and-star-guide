@@ -3,7 +3,7 @@ import logo from "@/assets/reading-room-logo.png.asset.json";
 import { SITE, type ShelfSlug } from "@/config/site";
 import { byNewest, countOn, essayUrl, featuredEssay, fmtMonth } from "@/content/essays";
 import { LETTER } from "@/content/letter";
-import { Reg, Star, StarRule } from "@/components/site/Marks";
+import { Star, StarRule } from "@/components/site/Marks";
 import { Sky, TwoSlitPlate, WavePlate } from "@/components/site/Sky";
 
 export const Route = createFileRoute("/")({
@@ -82,10 +82,7 @@ function Index() {
             </h2>
             <p className="tease">{feat.excerpt}</p>
             <p className="byline">David Rees Brown <i>with Claude</i></p>
-            <div className="regs" aria-label="Register of this essay">
-              {feat.register.map((r) => <Reg key={r} kind={r} />)}
-              <span className="meta tnum">· {feat.readingMinutes} min read</span>
-            </div>
+            <p className="meta tnum" style={{ marginTop: 18 }}>{feat.readingMinutes} min read</p>
             <div className="actions">
               <Link to="/essays/$slug" params={{ slug: feat.slug }} className="btn btn-primary">Read the essay <span className="arr" aria-hidden="true">→</span></Link>
               <a href={essayUrl(feat)} {...ext} className="btn btn-secondary">Discuss on Substack <span aria-hidden="true">↗</span></a>
