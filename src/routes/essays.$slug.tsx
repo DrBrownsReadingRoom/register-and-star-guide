@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { essayUrl, findEssay, fmtMonth, relatedTo, type Register } from "@/content/essays";
+import { essayUrl, findEssay, fmtMonth, relatedTo } from "@/content/essays";
 import { SHELVES, substackSubscribe } from "@/config/site";
-import { Reg, StarRule } from "@/components/site/Marks";
+import { StarRule } from "@/components/site/Marks";
 
 export const Route = createFileRoute("/essays/$slug")({
   loader: ({ params }) => {
@@ -54,18 +54,11 @@ function Body({ text }: { text: string }) {
               “{b.slice(2)}”<cite>From the essay</cite>
             </aside>
           );
-        const m = b.match(/^\[(evidence|inference|speculation)\]\s*/);
-        const kind = m?.[1] as Register | undefined;
         const cls = first ? "first" : undefined;
         first = false;
         return (
           <p key={i} className={cls}>
-            {kind && (
-              <span className="mark">
-                <Reg kind={kind} />
-              </span>
-            )}
-            {inline(m ? b.slice(m[0].length) : b)}
+            {inline(b)}
           </p>
         );
       })}
