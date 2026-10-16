@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SITE } from "@/config/site";
 import { BIO_ASK_LEAD, BIO_BODY, BIO_LEAD, BIO_QUESTION, BIO_SHORT } from "@/content/bio";
+import portraitAsset from "@/assets/david-rees-brown.jpg.asset.json";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -26,9 +27,9 @@ const METHOD = [
 function AboutPage() {
   return (
     <div className="wrap about">
-      <div className="portrait">
-        <span>Portrait of David<br />(photograph to come: reading table, natural light)</span>
-      </div>
+      <figure className="portrait">
+        <img src={portraitAsset.url} alt="David Rees Brown" width={383} height={441} />
+      </figure>
       <div className="about-text">
         <p className="label gold">About David</p>
         <h1>David Rees Brown</h1>
