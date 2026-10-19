@@ -12,6 +12,7 @@ const NAV: NavItem[] = [
   { label: "Essays", to: "/essays", exact: true },
   { label: "Science", shelf: "science" },
   { label: "Philosophy", shelf: "philosophy" },
+  { label: "Reflections", shelf: "reflections" },
   { label: "Books", to: "/books" },
   { label: "About David", to: "/about" },
 ];
