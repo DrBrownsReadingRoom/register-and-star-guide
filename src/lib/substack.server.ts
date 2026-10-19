@@ -26,7 +26,7 @@ const isoOf = (pub: string) => {
 
 export function parseFeed(xml: string): FeedItem[] {
   const doc = parser.parse(xml) as Record<string, any>;
-  const raw = doc?.rss?.channel?.item;
+  const raw = doc?.["rss"]?.["channel"]?.["item"];
   const items: unknown[] = Array.isArray(raw) ? raw : raw ? [raw] : [];
 
   const out: FeedItem[] = [];
