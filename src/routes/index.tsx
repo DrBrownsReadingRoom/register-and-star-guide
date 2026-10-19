@@ -3,7 +3,7 @@ import logo from "@/assets/reading-room-logo.png.asset.json";
 import { SITE, type ShelfSlug } from "@/config/site";
 import { byNewest, countOn, essayUrl, featuredEssay, fmtMonth } from "@/content/essays";
 import { LETTER } from "@/content/letter";
-import { Star, StarRule } from "@/components/site/Marks";
+import { Star } from "@/components/site/Marks";
 import { Sky } from "@/components/site/Sky";
 
 export const Route = createFileRoute("/")({
@@ -138,7 +138,6 @@ function Index() {
         </div>
       </section>
 
-      <div className="wrap"><StarRule /></div>
 
       {recent.length > 0 && (
         <section className="sec wrap" aria-labelledby="recent-h">
@@ -161,12 +160,6 @@ function Index() {
           </div>
         </section>
       )}
-
-      <div className="wrap" style={{ paddingBottom: "clamp(64px,9vw,112px)" }}>
-        <div className="flex justify-center">
-          <Link to="/essays" className="btn btn-secondary">Open the full catalogue <span className="arr" aria-hidden="true">→</span></Link>
-        </div>
-      </div>
     </>
   );
 }
