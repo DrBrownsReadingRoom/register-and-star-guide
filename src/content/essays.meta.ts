@@ -36,7 +36,5 @@ export const ESSAY_META: Record<string, EssayMeta> = {
 /** Where an essay goes until someone files it somewhere better. */
 export const DEFAULT_SHELF = "reflections" as const;
 
-/** Read this alongside ESSAY_META: the newest post is featured unless a flag says otherwise. */
-export const FEATURED_IS_NEWEST = true;
 
 export type { EssayMeta };
