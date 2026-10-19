@@ -98,7 +98,7 @@ Subscribe if you’d like the next one in your inbox. And welcome.
 
 export const byNewestOf = (list: Essay[]) => [...list].sort((a, b) => b.date.localeCompare(a.date));
 export const findIn = (list: Essay[], slug: string) => list.find((e) => e.slug === slug);
-export const featuredOf = (list: Essay[]) => list.find((e) => e.featured) ?? byNewestOf(list)[0];
+export const featuredOf = (list: Essay[]) => (list.find((e) => e.featured) ?? byNewestOf(list)[0])!;
 export const essayUrl = (e: Essay) => e.substackUrl ?? substackPost(e.slug);
 export const countOnIn = (list: Essay[], shelf: ShelfSlug) => list.filter((e) => e.shelf === shelf).length;
 export const fmtMonth = (iso: string, long = false) =>
