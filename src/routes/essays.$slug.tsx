@@ -46,13 +46,15 @@ function inline(text: string): ReactNode[] {
     else if (t.startsWith("_")) out.push(<em key={at}>{t.slice(1, -1)}</em>);
     else {
       const link = /^\[([^\]]+)\]\(([^)\s]+)\)$/.exec(t);
-      if (link && /^https?:\/\//i.test(link[2]))
+      const href = link?.[2] ?? "";
+      const label = link?.[1] ?? t;
+      if (/^https?:\/\//i.test(href))
         out.push(
-          <a key={at} href={link[2]} target="_blank" rel="noopener noreferrer">
-            {link[1]}
+          <a key={at} href={href} target="_blank" rel="noopener noreferrer">
+            {label}
           </a>,
         );
-      else out.push(link ? link[1] : t);
+      else out.push(label);
     }
     last = at + t.length;
   }

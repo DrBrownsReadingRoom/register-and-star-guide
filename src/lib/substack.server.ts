@@ -32,16 +32,16 @@ export function parseFeed(xml: string): FeedItem[] {
   const out: FeedItem[] = [];
   for (const value of items) {
     const it = (value ?? {}) as Record<string, unknown>;
-    const link = text(it.link).trim();
+    const link = text(it["link"]).trim();
     const slug = slugOf(link);
-    const date = isoOf(text(it.pubDate));
+    const date = isoOf(text(it["pubDate"]));
     if (!slug || !date) continue;
     out.push({
       slug,
-      url: link.split("?")[0],
+      url: link.split("?")[0] ?? link,
       date,
-      title: text(it.title),
-      description: text(it.description),
+      title: text(it["title"]),
+      description: text(it["description"]),
       html: text(it["content:encoded"] ?? it["content"]),
     });
   }
