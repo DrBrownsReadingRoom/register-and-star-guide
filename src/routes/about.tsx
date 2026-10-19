@@ -28,7 +28,7 @@ function AboutPage() {
   return (
     <div className="wrap about">
       <figure className="portrait">
-        <img src={portraitAsset.url} alt="David Rees Brown" width={383} height={441} />
+        <img src={portraitAsset.url} alt="David Rees Brown" width={676} height={838} />
       </figure>
       <div className="about-text">
         <p className="label gold">About David</p>
