@@ -6,6 +6,7 @@ export const SITE = {
 };
 
 export const substackPost = (slug: string) => `${SITE.substack}/p/${slug}`;
+export const substackFeed = `${SITE.substack}/feed`;
 export const substackArchive = `${SITE.substack}/archive`;
 export const substackSubscribe = `${SITE.substack}/subscribe`;
 export const subscribeUrl = (email: string) =>

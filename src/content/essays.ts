@@ -93,17 +93,20 @@ Subscribe if you’d like the next one in your inbox. And welcome.
   },
 ];
 
-export const byNewest = [...ESSAYS].sort((a, b) => b.date.localeCompare(a.date));
-export const findEssay = (slug: string) => ESSAYS.find((e) => e.slug === slug);
-export const featuredEssay = () => (ESSAYS.find((e) => e.featured) ?? byNewest[0])!;
+/** The live catalogue is read from Substack on every visit (src/lib/essays.functions.ts).
+ *  ESSAYS above is the offline snapshot: served only when Substack cannot be reached. */
+
+export const byNewestOf = (list: Essay[]) => [...list].sort((a, b) => b.date.localeCompare(a.date));
+export const findIn = (list: Essay[], slug: string) => list.find((e) => e.slug === slug);
+export const featuredOf = (list: Essay[]) => list.find((e) => e.featured) ?? byNewestOf(list)[0];
 export const essayUrl = (e: Essay) => e.substackUrl ?? substackPost(e.slug);
-export const countOn = (shelf: ShelfSlug) => ESSAYS.filter((e) => e.shelf === shelf).length;
+export const countOnIn = (list: Essay[], shelf: ShelfSlug) => list.filter((e) => e.shelf === shelf).length;
 export const fmtMonth = (iso: string, long = false) =>
   new Date(iso + "T00:00:00Z").toLocaleDateString("en-GB", { month: long ? "long" : "short", year: "numeric", timeZone: "UTC" });
 
-export function relatedTo(e: Essay): Essay[] {
-  const picked = (e.related ?? []).map(findEssay).filter((x): x is Essay => !!x);
-  const rest = byNewest.filter((x) => x.slug !== e.slug && !picked.includes(x));
+export function relatedIn(list: Essay[], e: Essay): Essay[] {
+  const picked = (e.related ?? []).map((s) => findIn(list, s)).filter((x): x is Essay => !!x);
+  const rest = byNewestOf(list).filter((x) => x.slug !== e.slug && !picked.includes(x));
   rest.sort((a, b) => Number(b.shelf === e.shelf) - Number(a.shelf === e.shelf));
   return [...picked, ...rest].slice(0, 3);
 }
