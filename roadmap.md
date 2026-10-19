@@ -4,6 +4,7 @@
 - [x] Match the site to what is live on Substack today (2026-10-12): David is releasing his work slowly, so only "Too Much of a Good Thing" (001, featured) and "Welcome to the Reading Room" (002) are listed. The four withdrawn posts are kept in `src/content/essays.unpublished.md` and their text removed from the catalogue, homepage and further-reading links. Shelves with nothing on them read "Coming soon" and are no longer links.
 
 - [x] David's portrait photograph is live on the About page (src/assets/david-rees-brown.jpg.asset.json), replacing the placeholder note.
+- [x] Homepage doorway (2026-10-19, at Mia's request): the labels above the headline read "Science · Philosophy · Reflections" and the headline reads "A private corner of the library". Search/social summary uses the same words.
 
 ## Still waiting on David
 - Real Amazon links: `SITE.amazonBook`, `SITE.amazonKindle`, `SITE.amazonAuthor` in src/config/site.ts are still placeholders.

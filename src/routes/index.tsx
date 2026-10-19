@@ -10,8 +10,8 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "The Reading Room — Essays by David Rees Brown" },
-      { name: "description", content: "A private corner of the universe for curious minds and unconventional questions. Essays on science, philosophy and reflection by David Rees Brown, with Claude." },
-      { property: "og:title", content: "The Reading Room — A private corner of the universe" },
+      { name: "description", content: "A private corner of the library for curious minds and unconventional questions. Essays on science, philosophy and reflection by David Rees Brown, with Claude." },
+      { property: "og:title", content: "The Reading Room — A private corner of the library" },
       { property: "og:description", content: "Essays on science, philosophy and reflection, shelved for the curious reader." },
     ],
   }),
@@ -55,8 +55,8 @@ function Index() {
         <Sky />
         <div className="wrap door-in">
           <div>
-            <p className="eyebrow"><i />Science · Philosophy · Discovery</p>
-            <h1>A private corner of the <em>universe</em></h1>
+            <p className="eyebrow"><i />Science · Philosophy · Reflections</p>
+            <h1>A private corner of the <em>library</em></h1>
             <p className="lede">For curious minds and unconventional questions.</p>
             <div className="actions">
               <Link to="/essays" className="btn btn-primary">Enter the Room <span className="arr" aria-hidden="true">→</span></Link>
