@@ -4,7 +4,7 @@ import { SITE, type ShelfSlug } from "@/config/site";
 import { byNewest, countOn, essayUrl, featuredEssay, fmtMonth } from "@/content/essays";
 import { LETTER } from "@/content/letter";
 import { Star, StarRule } from "@/components/site/Marks";
-import { Sky, TwoSlitPlate, WavePlate } from "@/components/site/Sky";
+import { Sky } from "@/components/site/Sky";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -67,11 +67,7 @@ function Index() {
       </div>
 
       <section className="sec wrap" aria-labelledby="feat-h">
-        <div className="featured">
-          <figure className="plate" style={{ margin: 0 }}>
-            <div className="plate-in">{feat.plateArt === "waves" ? <WavePlate /> : <TwoSlitPlate />}</div>
-            <figcaption><span>Plate I</span><span>{feat.plate ?? "Two openings, one stubborn question."}</span></figcaption>
-          </figure>
+        <div className="featured is-solo">
           <div className="feat-text">
             <div className="callno">
               <span className="acc tnum">RR · {feat.no}</span>
