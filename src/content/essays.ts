@@ -69,7 +69,7 @@ In the end, public issues are like waves at sea. One by one, they break on the s
   {
     no: "001",
     slug: "welcome-to-the-reading-room",
-    title: "Welcome to the Reading Room",
+    title: "SNAPSHOT ONLY",
     dek: "Opinion pieces, not proofs. Pull up a chair.",
     excerpt: "The doorway note: who writes these, how they get made, and what to expect. For the fans, not the players.",
     shelf: "reflections",
