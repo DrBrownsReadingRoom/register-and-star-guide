@@ -60,7 +60,8 @@
 @media (max-width:860px){.featured{grid-template-columns:1fr}}
 /* Featured essay with no plate: the text keeps its own measure instead of a half column. */
 .featured.is-solo{grid-template-columns:minmax(0,1fr)}
-.featured.is-solo .feat-text{max-width:72ch}
+.featured.is-solo .feat-text{max-width:66ch;margin-inline:auto}
+.featured.is-solo .feat-text .tease{max-width:56ch}
 
 
 /* ---------- shelves ---------- */
