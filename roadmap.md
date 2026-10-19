@@ -5,6 +5,7 @@
 
 - [x] David's portrait photograph is live on the About page (src/assets/david-rees-brown.jpg.asset.json), replacing the placeholder note.
 - [x] Homepage doorway (2026-10-19, at Mia's request): the labels above the headline read "Science · Philosophy · Reflections" and the headline reads "A private corner of the library". Search/social summary uses the same words.
+- [x] The site now reads David's Substack itself (2026-10-19): a new post appears the moment he publishes and a withdrawn one disappears, with no one editing files. Filing overrides live in `src/content/essays.meta.ts`.
 
 ## Still waiting on David
 - Real Amazon links: `SITE.amazonBook`, `SITE.amazonKindle`, `SITE.amazonAuthor` in src/config/site.ts are still placeholders.
