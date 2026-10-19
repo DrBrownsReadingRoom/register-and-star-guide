@@ -1,7 +1,9 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import logo from "@/assets/reading-room-logo.png.asset.json";
 import { SITE, type ShelfSlug } from "@/config/site";
-import { byNewest, countOn, essayUrl, featuredEssay, fmtMonth } from "@/content/essays";
+import { byNewestOf, countOnIn, essayUrl, featuredOf, fmtMonth } from "@/content/essays";
+import { essaysQuery } from "@/lib/essays.query";
 import { LETTER } from "@/content/letter";
 import { Star } from "@/components/site/Marks";
 import { Sky } from "@/components/site/Sky";
@@ -15,6 +17,7 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Essays on science, philosophy and reflection, shelved for the curious reader." },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(essaysQuery),
   component: Index,
 });
 
@@ -22,8 +25,7 @@ const ext = { target: "_blank", rel: "noopener" } as const;
 const plural = (n: number) => `${n} ${n === 1 ? "essay" : "essays"}`;
 
 /** A shelf spine: a link when the shelf holds essays, a quiet marker while it is empty. */
-function ShelfSpine({ shelf, cls, star }: { shelf: ShelfSlug; cls: string; star: string }) {
-  const n = countOn(shelf);
+function ShelfSpine({ shelf, cls, star, n }: { shelf: ShelfSlug; cls: string; star: string; n: number }) {
   const name = shelf.charAt(0).toUpperCase() + shelf.slice(1);
   const inner = (
     <>
@@ -41,8 +43,9 @@ function ShelfSpine({ shelf, cls, star }: { shelf: ShelfSlug; cls: string; star:
 }
 
 function Index() {
-  const feat = featuredEssay();
-  const recent = byNewest.filter((e) => e.slug !== feat.slug && e.slug !== "welcome-to-the-reading-room").slice(0, 3);
+  const { data: essays } = useSuspenseQuery(essaysQuery);
+  const feat = featuredOf(essays);
+  const recent = byNewestOf(essays).filter((e) => e.slug !== feat.slug && e.slug !== "welcome-to-the-reading-room").slice(0, 3);
   const shelfName = { science: "Science", philosophy: "Philosophy", reflections: "Reflections" };
 
   return (
@@ -96,10 +99,10 @@ function Index() {
           </div>
           <div className="shelf">
             <span className="spine dec d1" aria-hidden="true" />
-            <ShelfSpine shelf="science" cls="sp-navy" star="#B18B49" />
+            <ShelfSpine shelf="science" cls="sp-navy" star="#B18B49" n={countOnIn(essays, "science")} />
             <span className="spine dec d2" aria-hidden="true" />
-            <ShelfSpine shelf="philosophy" cls="sp-ivory" star="#B18B49" />
-            <ShelfSpine shelf="reflections" cls="sp-slate" star="#E7D3A8" />
+            <ShelfSpine shelf="philosophy" cls="sp-ivory" star="#B18B49" n={countOnIn(essays, "philosophy")} />
+            <ShelfSpine shelf="reflections" cls="sp-slate" star="#E7D3A8" n={countOnIn(essays, "reflections")} />
             <span className="spine dec d3" aria-hidden="true" />
             <Link to="/books" className="spine sp-gold">
               <span className="band" /><Star fill="#071D30" className="em" /><span className="t">The Books</span><span className="c">On Amazon</span><span className="band" />

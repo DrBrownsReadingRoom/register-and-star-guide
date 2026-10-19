@@ -1,11 +1,14 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { SHELVES } from "@/config/site";
 import { Catalogue, CatalogueTop } from "@/components/site/Catalogue";
+import { essaysQuery } from "@/lib/essays.query";
 
 export const Route = createFileRoute("/shelves/$shelf")({
-  loader: ({ params }) => {
+  loader: async ({ params, context }) => {
     const shelf = SHELVES.find((s) => s.slug === params.shelf);
     if (!shelf) throw notFound();
+    await context.queryClient.ensureQueryData(essaysQuery);
     return { shelf };
   },
   head: ({ loaderData }) => {
@@ -25,10 +28,11 @@ export const Route = createFileRoute("/shelves/$shelf")({
 
 function ShelfPage() {
   const { shelf } = Route.useLoaderData();
+  const { data: essays } = useSuspenseQuery(essaysQuery);
   return (
     <>
       <CatalogueTop />
-      <Catalogue shelf={shelf.slug} />
+      <Catalogue essays={essays} shelf={shelf.slug} />
     </>
   );
 }

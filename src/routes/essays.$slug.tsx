@@ -1,11 +1,15 @@
+import type { ReactNode } from "react";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { essayUrl, findEssay, fmtMonth, relatedTo } from "@/content/essays";
+import { essayUrl, findIn, fmtMonth, relatedIn } from "@/content/essays";
 import { SHELVES, substackSubscribe } from "@/config/site";
 import { StarRule } from "@/components/site/Marks";
+import { essaysQuery } from "@/lib/essays.query";
 
 export const Route = createFileRoute("/essays/$slug")({
-  loader: ({ params }) => {
-    const essay = findEssay(params.slug);
+  loader: async ({ params, context }) => {
+    const essays = await context.queryClient.ensureQueryData(essaysQuery);
+    const essay = findIn(essays, params.slug);
     if (!essay) throw notFound();
     return { essay };
   },
@@ -28,17 +32,34 @@ export const Route = createFileRoute("/essays/$slug")({
 
 const ext = { target: "_blank", rel: "noopener" } as const;
 
-const EMPH = /(\*\*[^*]+\*\*|_[^_]+_)/g;
-function inline(text: string) {
-  return text.split(EMPH).map((p, i) =>
-    p.startsWith("**") && p.endsWith("**") ? (
-      <strong key={i}>{p.slice(2, -2)}</strong>
-    ) : p.startsWith("_") && p.endsWith("_") ? (
-      <em key={i}>{p.slice(1, -1)}</em>
-    ) : (
-      p
-    ),
-  );
+const TOKEN = /\*\*[^*]+\*\*|_[^_]+_|\[[^\]]+\]\([^)\s]+\)/g;
+
+/** Bold, italic and links — the only marks an essay body is allowed to carry. */
+function inline(text: string): ReactNode[] {
+  const out: ReactNode[] = [];
+  let last = 0;
+  for (const m of text.matchAll(TOKEN)) {
+    const at = m.index ?? 0;
+    if (at > last) out.push(text.slice(last, at));
+    const t = m[0];
+    if (t.startsWith("**")) out.push(<strong key={at}>{t.slice(2, -2)}</strong>);
+    else if (t.startsWith("_")) out.push(<em key={at}>{t.slice(1, -1)}</em>);
+    else {
+      const link = /^\[([^\]]+)\]\(([^)\s]+)\)$/.exec(t);
+      const href = link?.[2] ?? "";
+      const label = link?.[1] ?? t;
+      if (/^https?:\/\//i.test(href))
+        out.push(
+          <a key={at} href={href} target="_blank" rel="noopener noreferrer">
+            {label}
+          </a>,
+        );
+      else out.push(label);
+    }
+    last = at + t.length;
+  }
+  if (last < text.length) out.push(text.slice(last));
+  return out;
 }
 
 function Body({ text }: { text: string }) {
@@ -68,8 +89,9 @@ function Body({ text }: { text: string }) {
 
 function EssayPage() {
   const { essay } = Route.useLoaderData();
+  const { data: essays } = useSuspenseQuery(essaysQuery);
   const shelf = SHELVES.find((s) => s.slug === essay.shelf)!;
-  const further = relatedTo(essay);
+  const further = relatedIn(essays, essay);
   return (
     <article>
       <header className="essay-head">
