@@ -19,6 +19,7 @@ export const ESSAY_META: Record<string, EssayMeta> = {
     dek: "How social media, online news, and the First Amendment are killing democracy",
     excerpt:
       "A legal framework built for scarce information now shields an ecosystem that drowns us in it. Speech without accountability, amplification instead of discourse.",
+    readingMinutes: 4,
     featured: true,
     plateArt: "waves",
     plate: "Waves breaking, one by one.",
@@ -29,6 +30,7 @@ export const ESSAY_META: Record<string, EssayMeta> = {
     shelf: "reflections",
     dek: "Opinion pieces, not proofs. Pull up a chair.",
     excerpt: "The doorway note: who writes these, how they get made, and what to expect. For the fans, not the players.",
+    readingMinutes: 3,
     related: ["too-much-of-a-good-thing"],
   },
 };
