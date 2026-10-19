@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { byNewest, essayUrl, fmtMonth } from "@/content/essays";
+import { byNewestOf, essayUrl, fmtMonth, type Essay } from "@/content/essays";
 import { SHELVES, substackArchive, type ShelfSlug } from "@/config/site";
 
 const ext = { target: "_blank", rel: "noopener" } as const;
 const nameOf = (s: ShelfSlug) => SHELVES.find((x) => x.slug === s)!.name;
 
-export function Catalogue({ shelf: initial, focusSearch }: { shelf?: ShelfSlug; focusSearch?: boolean }) {
+export function Catalogue({ essays, shelf: initial, focusSearch }: { essays: Essay[]; shelf?: ShelfSlug; focusSearch?: boolean }) {
   const [shelf, setShelf] = useState<ShelfSlug | "all">(initial ?? "all");
   const [q, setQ] = useState("");
   const ref = useRef<HTMLInputElement>(null);
@@ -17,12 +17,12 @@ export function Catalogue({ shelf: initial, focusSearch }: { shelf?: ShelfSlug; 
   }, [focusSearch]);
 
   const term = q.trim().toLowerCase();
-  const list = byNewest.filter(
+  const list = byNewestOf(essays).filter(
     (e) => (shelf === "all" || e.shelf === shelf) && (!term || `${e.title} ${e.excerpt}`.toLowerCase().includes(term)),
   );
   const drawers: { key: ShelfSlug | "all"; label: string; n: number }[] = [
-    { key: "all", label: "All", n: byNewest.length },
-    ...SHELVES.map((s) => ({ key: s.slug, label: s.name, n: byNewest.filter((e) => e.shelf === s.slug).length })),
+    { key: "all", label: "All", n: essays.length },
+    ...SHELVES.map((s) => ({ key: s.slug, label: s.name, n: essays.filter((e) => e.shelf === s.slug).length })),
   ];
 
   return (
