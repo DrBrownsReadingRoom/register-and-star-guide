@@ -5,7 +5,7 @@ import { Emblem } from "./Emblem";
 
 type NavItem =
   | { label: string; to: "/" | "/essays" | "/books" | "/about"; exact?: boolean }
-  | { label: string; shelf: "science" | "philosophy" };
+  | { label: string; shelf: "science" | "philosophy" | "reflections" };
 
 const NAV: NavItem[] = [
   { label: "The Room", to: "/", exact: true },
