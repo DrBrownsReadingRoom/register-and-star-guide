@@ -1,5 +1,3 @@
-import { SITE } from "@/config/site";
-
 export interface Book {
   title: string;
   subtitle: string;

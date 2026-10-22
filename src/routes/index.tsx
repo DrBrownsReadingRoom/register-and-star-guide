@@ -130,8 +130,8 @@ function Index() {
             <p className="open">{LETTER.open}</p>
             {LETTER.paras.map((p) => <p key={p}>{p}</p>)}
             <p>{LETTER.close}</p>
-            <p><Link to="/essays/$slug" params={{ slug: "welcome-to-the-reading-room" }}>Read the welcome note →</Link></p>
             <div className="sig"><span className="n">David Rees Brown</span><span className="w">with Claude</span></div>
+            <p className="mt-6"><Link to="/essays/$slug" params={{ slug: "welcome-to-the-reading-room" }}>Read the welcome note →</Link></p>
           </article>
         </div>
       </section>
