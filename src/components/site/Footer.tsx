@@ -25,6 +25,7 @@ export function Footer() {
           <ul className="space-y-3">
             <li><Link to="/" className={colLink}>Home</Link></li>
             <li><Link to="/essays" className={colLink}>Catalogue</Link></li>
+            <li><Link to="/papers" className={colLink}>Papers</Link></li>
             <li><Link to="/pensamientos" className={colLink}>Pensamientos</Link></li>
             <li><Link to="/essays" search={{ focus: 1 }} className={colLink}>Search</Link></li>
             <li><Link to="/about" className={colLink}>About David</Link></li>

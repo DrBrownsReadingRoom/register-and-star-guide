@@ -165,6 +165,7 @@ a.spine:hover,a.spine:focus-visible{transform:translateY(-14px);box-shadow:inset
 .find:focus-within{border-bottom-color:var(--gold);box-shadow:0 1px 0 var(--gold)}
 .ledger{list-style:none;margin:0;padding:0}
 .row{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:24px;padding-block:28px;border-bottom:1px solid var(--rule);align-items:start}
+.row.has-no{grid-template-columns:72px minmax(0,1fr) 150px}
 .row .no{font:600 13px/1.6 var(--font-ui);letter-spacing:.1em;color:var(--slate)}
 .row h3,.row .row-title{font-size:clamp(24px,2.6vw,30px);font-weight:500}
 .row .row-title a{text-decoration:none}
@@ -175,7 +176,7 @@ a.spine:hover,a.spine:focus-visible{transform:translateY(-14px);box-shadow:inset
 .row .side{display:grid;gap:8px;font:400 14px/1.4 var(--font-ui);color:var(--slate)}
 .row .side .sh{font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--gold-ink)}
 .empty{padding:48px 0;color:var(--slate);font-style:italic}
-@media (max-width:860px){.row{grid-template-columns:1fr;gap:10px}.row .side{grid-template-columns:repeat(3,auto);justify-content:start;gap:18px}}
+@media (max-width:860px){.row,.row.has-no{grid-template-columns:1fr;gap:10px}.row .side{grid-template-columns:repeat(3,auto);justify-content:start;gap:18px}}
 
 /* ---------- essay page ---------- */
 .essay-head{max-width:880px;margin-inline:auto;padding:clamp(48px,7vw,96px) var(--gutter) 40px;text-align:center}
@@ -187,6 +188,9 @@ a.spine:hover,a.spine:focus-visible{transform:translateY(-14px);box-shadow:inset
 .essay-head .credit .a{font:400 19px/1 var(--font-display);letter-spacing:.22em;text-transform:uppercase}
 .essay-head .credit .c{font:italic 400 15px/1 var(--font-display);color:var(--slate)}
 .essay-head .facts{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:center}
+.essay-head .paper-line{margin:18px 0 0;font:italic 400 17px/1.5 var(--font-reading);color:var(--slate)}
+.essay-head .paper-line a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px}
+.essay-head .paper-line a:hover{text-decoration:underline;text-decoration-color:var(--gold)}
 .essay-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,var(--reading-width)) minmax(0,1fr);column-gap:40px;padding-inline:var(--gutter);padding-bottom:64px}
 .essay-body>*{grid-column:2}
 .essay-body p{font-size:20px;line-height:1.68;position:relative}

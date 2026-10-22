@@ -1,5 +1,6 @@
 # Roadmap
 
+- [x] Add academic papers: `src/content/papers.ts` (empty for now), /papers page ("The longer arguments"), essay-page "full argument" links, header link hidden until the first paper arrives, footer link under The Room.
 - [x] Add Pensamientos: eight supplied lines, UTC daily homepage band, ruled collection page and header/footer links.
 
 - [x] Apply Mia's October 22 changes: biography, book preparation status and links, simplified header, populated homepage shelves only, motto, short merged note, footer credit and removal of catalogue/card register labels.
