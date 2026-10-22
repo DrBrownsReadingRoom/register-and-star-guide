@@ -45,7 +45,6 @@ function AboutPage() {
         </ol>
         <div className="about-links">
           <a href={SITE.substack} {...ext} className="btn btn-primary">Follow on Substack <span aria-hidden="true">↗</span></a>
-          <a href={SITE.amazonAuthor} {...ext} className="btn btn-secondary">Amazon author page <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </div>

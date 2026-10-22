@@ -25,6 +25,7 @@
 .door h1{font-size:clamp(44px,6.6vw,80px);font-weight:600;color:var(--ivory);margin-top:22px;max-width:12ch}
 .door h1 em{font-style:italic;font-weight:400;color:#E7D3A8}
 .door .lede{font:400 21px/1.55 var(--font-reading);color:rgba(249,247,240,.84);max-width:34ch;margin-top:22px}
+.door .motto{font:italic 400 19px/1.55 var(--font-reading);color:rgba(249,247,240,.84);max-width:42ch;margin-top:10px}
 .door .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
 .door .btn-primary{background:var(--ivory);color:var(--navy);border-color:var(--ivory)}
 .door .btn-primary:hover{background:#fff;border-color:var(--gold)}

@@ -3,16 +3,11 @@ import { useEffect, useState } from "react";
 import { SITE } from "@/config/site";
 import { Emblem } from "./Emblem";
 
-type NavItem =
-  | { label: string; to: "/" | "/essays" | "/books" | "/about"; exact?: boolean }
-  | { label: string; shelf: "science" | "philosophy" | "reflections" };
+type NavItem = { label: string; to: "/" | "/essays" | "/books" | "/about"; exact?: boolean };
 
 const NAV: NavItem[] = [
   { label: "The Room", to: "/", exact: true },
   { label: "Essays", to: "/essays", exact: true },
-  { label: "Science", shelf: "science" },
-  { label: "Philosophy", shelf: "philosophy" },
-  { label: "Reflections", shelf: "reflections" },
   { label: "Books", to: "/books" },
   { label: "About David", to: "/about" },
 ];
@@ -20,15 +15,6 @@ const NAV: NavItem[] = [
 const linkBase =
   "font-ui text-[13px] font-semibold uppercase tracking-[0.12em] text-navy no-underline border-b border-transparent pb-1 hover:border-gold/60";
 const active = { className: "border-gold!" };
-
-function Magnifier() {
-  return (
-    <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="7" cy="7" r="4.5" />
-      <path d="M10.5 10.5L14 14" />
-    </svg>
-  );
-}
 
 function NavLinks({ onNavigate, row }: { onNavigate?: () => void; row?: boolean }) {
   const cls = row
@@ -39,22 +25,11 @@ function NavLinks({ onNavigate, row }: { onNavigate?: () => void; row?: boolean 
     <>
       {NAV.map((item) => (
         <li key={item.label}>
-          {"to" in item ? (
-            <Link to={item.to} className={cls} activeProps={act} activeOptions={{ exact: !!item.exact }} onClick={onNavigate}>
-              {item.label}
-            </Link>
-          ) : (
-            <Link to="/shelves/$shelf" params={{ shelf: item.shelf }} className={cls} activeProps={act} onClick={onNavigate}>
-              {item.label}
-            </Link>
-          )}
+          <Link to={item.to} className={cls} activeProps={act} activeOptions={{ exact: !!item.exact }} onClick={onNavigate}>
+            {item.label}
+          </Link>
         </li>
       ))}
-      <li>
-        <Link to="/essays" search={{ focus: 1 }} className={`${cls} inline-flex items-center gap-1.5`} onClick={onNavigate}>
-          Search <Magnifier />
-        </Link>
-      </li>
     </>
   );
 }

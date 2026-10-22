@@ -47,7 +47,7 @@ export function Catalogue({ essays, shelf: initial, focusSearch }: { essays: Ess
       <ol className="ledger">
         {list.map((e) => (
           <li key={e.slug} className="row">
-            <span className="no tnum">RR · {e.no}</span>
+            <span className="no" aria-hidden="true" />
             <div style={{ minWidth: 0 }}>
               <h2 className="row-title">
                 <Link to="/essays/$slug" params={{ slug: e.slug }}>{e.title}</Link>

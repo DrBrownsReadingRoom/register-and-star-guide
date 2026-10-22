@@ -61,6 +61,7 @@ function Index() {
             <p className="eyebrow"><i />Science · Philosophy · Reflections</p>
             <h1>A private corner of the <em>library</em></h1>
             <p className="lede">For curious minds and unconventional questions.</p>
+            <p className="motto">We're storytellers, not scientists. These are ideas, not facts.</p>
             <div className="actions">
               <Link to="/essays" className="btn btn-primary">Enter the Room <span className="arr" aria-hidden="true">→</span></Link>
               <a href={SITE.substack} {...ext} className="btn btn-ghost">Read on Substack <span aria-hidden="true">↗</span></a>
@@ -72,10 +73,7 @@ function Index() {
       <section className="sec wrap" aria-labelledby="feat-h">
         <div className="featured is-solo">
           <div className="feat-text">
-            <div className="callno">
-              <span className="acc tnum">RR · {feat.no}</span>
-              <span className="label gold">Featured from the {shelfName[feat.shelf]} shelf</span>
-            </div>
+            <p className="label gold">Featured from the {shelfName[feat.shelf]} shelf</p>
             <h2 id="feat-h" className="feat-title">
               <Link to="/essays/$slug" params={{ slug: feat.slug }} style={{ textDecoration: "none" }}>{feat.title}</Link>
             </h2>
@@ -99,13 +97,13 @@ function Index() {
           </div>
           <div className="shelf">
             <span className="spine dec d1" aria-hidden="true" />
-            <ShelfSpine shelf="science" cls="sp-navy" star="#B18B49" n={countOnIn(essays, "science")} />
+            {countOnIn(essays, "science") > 0 && <ShelfSpine shelf="science" cls="sp-navy" star="#B18B49" n={countOnIn(essays, "science")} />}
             <span className="spine dec d2" aria-hidden="true" />
-            <ShelfSpine shelf="philosophy" cls="sp-ivory" star="#B18B49" n={countOnIn(essays, "philosophy")} />
-            <ShelfSpine shelf="reflections" cls="sp-slate" star="#E7D3A8" n={countOnIn(essays, "reflections")} />
+            {countOnIn(essays, "philosophy") > 0 && <ShelfSpine shelf="philosophy" cls="sp-ivory" star="#B18B49" n={countOnIn(essays, "philosophy")} />}
+            {countOnIn(essays, "reflections") > 0 && <ShelfSpine shelf="reflections" cls="sp-slate" star="#E7D3A8" n={countOnIn(essays, "reflections")} />}
             <span className="spine dec d3" aria-hidden="true" />
             <Link to="/books" className="spine sp-gold">
-              <span className="band" /><Star fill="#071D30" className="em" /><span className="t">The Books</span><span className="c">On Amazon</span><span className="band" />
+              <span className="band" /><Star fill="#071D30" className="em" /><span className="t">The Books</span><span className="c">In preparation</span><span className="band" />
             </Link>
             <span className="spine dec d4" aria-hidden="true" />
             <span className="spine dec d5" aria-hidden="true" />
@@ -129,13 +127,8 @@ function Index() {
           <article className="letter">
             <p className="open">{LETTER.open}</p>
             {LETTER.paras.map((p) => <p key={p}>{p}</p>)}
-            {LETTER.runs.map((r) => (
-              <p className="run" key={r.lead}>
-                <span className="label gold">{r.lead}</span>
-                {r.body}
-              </p>
-            ))}
             <p>{LETTER.close}</p>
+            <p><Link to="/essays/$slug" params={{ slug: "welcome-to-the-reading-room" }}>Read the welcome note →</Link></p>
             <div className="sig"><span className="n">David Rees Brown</span><span className="w">with Claude</span></div>
           </article>
         </div>
@@ -151,7 +144,7 @@ function Index() {
           <div className="cards">
             {recent.map((e) => (
               <Link key={e.slug} to="/essays/$slug" params={{ slug: e.slug }} className="card">
-                <span className="top tnum"><span>RR · {e.no}</span><span className="sh">{shelfName[e.shelf]}</span></span>
+                <span className="top"><span className="sh">{shelfName[e.shelf]}</span></span>
                 <h3>{e.title}</h3>
                 <p>{e.excerpt}</p>
                 <span className="foot">
