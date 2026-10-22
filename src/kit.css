@@ -23,7 +23,7 @@
 .door .eyebrow{font:600 12px/1 var(--font-ui);letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px}
 .door .eyebrow i{display:block;width:40px;height:1px;background:var(--gold)}
 .door h1{font-size:clamp(44px,6.6vw,80px);font-weight:600;color:var(--ivory);margin-top:22px;max-width:12ch}
-.door h1 em{font-style:italic;font-weight:400;color:#E7D3A8}
+.door h1 em{font-style:italic;font-weight:500;color:var(--rr-gold-light);font-size:1.12em;letter-spacing:.01em}
 .door .lede{font:400 21px/1.55 var(--font-reading);color:rgba(249,247,240,.84);max-width:34ch;margin-top:22px}
 .door .motto{font:italic 400 19px/1.55 var(--font-reading);color:rgba(249,247,240,.84);max-width:42ch;margin-top:10px}
 .door .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
