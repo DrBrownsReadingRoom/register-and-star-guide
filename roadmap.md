@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Apply Mia's October 22 changes: biography, book preparation status and links, simplified header, populated homepage shelves only, motto, short merged note, footer credit and removal of catalogue/card register labels.
+- [x] Apply Mia's October 22 changes: biography, book preparation status and links, simplified header, populated homepage shelves only, motto, short merged note, footer credit and removal of catalogue/card register labels.
 
 - [x] Replace sample essays and placeholder links with the real content from David's Substack (https://davidrbrown1.substack.com/) — titles, dates, excerpts, archive link, and any real Amazon links surfaced there.
 - [x] Match the site to what is live on Substack today (2026-10-12): David is releasing his work slowly, so only "Too Much of a Good Thing" (001, featured) and "Welcome to the Reading Room" (002) are listed. The four withdrawn posts are kept in `src/content/essays.unpublished.md` and their text removed from the catalogue, homepage and further-reading links. Shelves with nothing on them read "Coming soon" and are no longer links.
