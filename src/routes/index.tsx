@@ -8,6 +8,7 @@ import { LETTER } from "@/content/letter";
 import { Star } from "@/components/site/Marks";
 import { Sky } from "@/components/site/Sky";
 import { populatedShelves } from "@/lib/site-presentation";
+import { PensamientoBand } from "@/components/site/PensamientoBand";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,7 +21,10 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(essaysQuery),
+  loader: async ({ context }) => ({
+    essays: await context.queryClient.ensureQueryData(essaysQuery),
+    date: new Date().toISOString(),
+  }),
   component: Index,
 });
 
@@ -45,6 +49,7 @@ function ShelfSpine({ shelf, cls, star, n }: { shelf: ShelfSlug; cls: string; st
 
 function Index() {
   const { data: essays } = useSuspenseQuery(essaysQuery);
+  const { date } = Route.useLoaderData();
   const feat = featuredOf(essays);
   const recent = byNewestOf(essays).filter((e) => e.slug !== feat.slug && e.slug !== "welcome-to-the-reading-room").slice(0, 3);
   const shelfName = { science: "Science", philosophy: "Philosophy", reflections: "Reflections" };
@@ -89,6 +94,8 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <PensamientoBand initialDate={date} />
 
       <section className="shelves-band" aria-labelledby="shelves-h">
         <div className="wrap sec" style={{ paddingBottom: "clamp(80px,10vw,120px)" }}>

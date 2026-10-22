@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import { SITE } from "@/config/site";
 import { Emblem } from "./Emblem";
 
-type NavItem = { label: string; to: "/" | "/essays" | "/books" | "/about"; exact?: boolean };
+type NavItem = { label: string; to: "/" | "/essays" | "/pensamientos" | "/books" | "/about"; exact?: boolean };
 
 const NAV: NavItem[] = [
   { label: "The Room", to: "/", exact: true },
   { label: "Essays", to: "/essays", exact: true },
+  { label: "Pensamientos", to: "/pensamientos" },
   { label: "Books", to: "/books" },
   { label: "About David", to: "/about" },
 ];

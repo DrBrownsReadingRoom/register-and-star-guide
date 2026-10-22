@@ -65,6 +65,21 @@
 .featured.is-solo .feat-text .tease{max-width:56ch}
 
 
+/* ---------- pensamientos ---------- */
+.pensamiento-band{background:var(--parchment);border-block:1px solid var(--gold)}
+.pensamiento-band-in{display:grid;grid-template-columns:160px minmax(0,1fr) 150px;align-items:center;gap:40px;padding-block:64px}
+.pensamiento-no{font:600 13px/1.5 var(--font-ui);letter-spacing:0;text-transform:uppercase;color:var(--slate);white-space:nowrap}
+.pensamiento-band .pensamiento-no{margin-top:12px}
+.pensamiento-band .label{letter-spacing:0}
+.pensamiento-daily{font:italic 400 34px/1.35 var(--font-display);color:var(--navy);max-width:30ch;text-wrap:balance;justify-self:center}
+.pensamiento-link{font:600 14px/1.5 var(--font-ui);letter-spacing:0;color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:5px;justify-self:end}
+.pensamientos-page{padding-bottom:96px}
+.pensamientos-list{list-style:none;margin:0;padding:0}
+.pensamiento-row{display:grid;grid-template-columns:130px minmax(0,1fr);gap:32px;align-items:baseline;padding-block:32px;border-bottom:1px solid var(--rule)}
+.pensamiento-text{font:italic 400 28px/1.4 var(--font-display);color:var(--navy);text-wrap:balance;max-width:48ch}
+.pensamiento-source{display:inline-block;margin-top:16px}
+@media(max-width:760px){.pensamiento-band-in{grid-template-columns:1fr;gap:24px;padding-block:44px}.pensamiento-daily{font-size:24px;justify-self:start}.pensamiento-link{justify-self:start}.pensamiento-row{grid-template-columns:1fr;gap:12px;padding-block:28px}.pensamiento-text{font-size:26px}}
+
 /* ---------- shelves ---------- */
 .shelves-band{background:var(--parchment);border-block:1px solid var(--rule)}
 .shelf{position:relative;display:flex;align-items:flex-end;gap:6px;padding:0 clamp(8px,3vw,32px);min-height:380px}
