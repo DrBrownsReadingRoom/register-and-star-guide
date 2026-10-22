@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Architecture
+- Pensamientos content and pure UTC daily selection live in src/content/pensamientos.ts; the homepage loader supplies the initial selection to keep server and browser rendering consistent.
 - Site chrome (Header, SubscribeBand, Footer) is rendered once in `src/routes/__root.tsx` RootShell — so every page, including 404, gets it.
 - Brand tokens live in `src/styles.css` (`--rr-*` vars mapped to Tailwind colors/fonts; radius forced to 0) — Tailwind v4 has no config file.
 - External URLs only in `src/config/site.ts`; essay filing overrides only in `src/content/essays.meta.ts`; David's supplied biography wording only in `src/content/bio.ts`; David's supplied homepage letter wording only in `src/content/letter.ts` — single source for content edits.

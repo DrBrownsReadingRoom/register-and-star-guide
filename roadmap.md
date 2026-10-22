@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Add Pensamientos: eight supplied lines, UTC daily homepage band, ruled collection page and header/footer links.
+
 - [x] Apply Mia's October 22 changes: biography, book preparation status and links, simplified header, populated homepage shelves only, motto, short merged note, footer credit and removal of catalogue/card register labels.
 
 - [x] Replace sample essays and placeholder links with the real content from David's Substack (https://davidrbrown1.substack.com/) — titles, dates, excerpts, archive link, and any real Amazon links surfaced there.

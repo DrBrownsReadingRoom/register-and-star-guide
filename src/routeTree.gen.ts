@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as BooksRouteImport } from './routes/books'
+import { Route as PensamientosRouteImport } from './routes/pensamientos'
 import { Route as EssaysIndexRouteImport } from './routes/essays.index'
 import { Route as EssaysSlugRouteImport } from './routes/essays.$slug'
 import { Route as ShelvesShelfRouteImport } from './routes/shelves.$shelf'
@@ -29,6 +30,11 @@ const AboutRoute = AboutRouteImport.update({
 const BooksRoute = BooksRouteImport.update({
   id: '/books',
   path: '/books',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PensamientosRoute = PensamientosRouteImport.update({
+  id: '/pensamientos',
+  path: '/pensamientos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EssaysIndexRoute = EssaysIndexRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/books': typeof BooksRoute
+  '/pensamientos': typeof PensamientosRoute
   '/essays/$slug': typeof EssaysSlugRoute
   '/shelves/$shelf': typeof ShelvesShelfRoute
   '/essays/': typeof EssaysIndexRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/books': typeof BooksRoute
+  '/pensamientos': typeof PensamientosRoute
   '/essays/$slug': typeof EssaysSlugRoute
   '/shelves/$shelf': typeof ShelvesShelfRoute
   '/essays': typeof EssaysIndexRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/books': typeof BooksRoute
+  '/pensamientos': typeof PensamientosRoute
   '/essays/$slug': typeof EssaysSlugRoute
   '/shelves/$shelf': typeof ShelvesShelfRoute
   '/essays/': typeof EssaysIndexRoute
@@ -75,15 +84,28 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/about' | '/books' | '/essays/$slug' | '/shelves/$shelf' | '/essays/'
+    | '/'
+    | '/about'
+    | '/books'
+    | '/pensamientos'
+    | '/essays/$slug'
+    | '/shelves/$shelf'
+    | '/essays/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/about' | '/books' | '/essays/$slug' | '/shelves/$shelf' | '/essays'
+    | '/'
+    | '/about'
+    | '/books'
+    | '/pensamientos'
+    | '/essays/$slug'
+    | '/shelves/$shelf'
+    | '/essays'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/books'
+    | '/pensamientos'
     | '/essays/$slug'
     | '/shelves/$shelf'
     | '/essays/'
@@ -93,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   BooksRoute: typeof BooksRoute
+  PensamientosRoute: typeof PensamientosRoute
   EssaysSlugRoute: typeof EssaysSlugRoute
   ShelvesShelfRoute: typeof ShelvesShelfRoute
   EssaysIndexRoute: typeof EssaysIndexRoute
@@ -119,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/books'
       fullPath: '/books'
       preLoaderRoute: typeof BooksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pensamientos': {
+      id: '/pensamientos'
+      path: '/pensamientos'
+      fullPath: '/pensamientos'
+      preLoaderRoute: typeof PensamientosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/essays/': {
@@ -149,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   BooksRoute: BooksRoute,
+  PensamientosRoute: PensamientosRoute,
   EssaysSlugRoute: EssaysSlugRoute,
   ShelvesShelfRoute: ShelvesShelfRoute,
   EssaysIndexRoute: EssaysIndexRoute,
