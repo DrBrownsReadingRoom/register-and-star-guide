@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { essayUrl, findIn, fmtMonth, relatedIn } from "@/content/essays";
+import { paperForEssay, paperHref } from "@/content/papers";
 import { SHELVES, substackSubscribe } from "@/config/site";
 import { StarRule } from "@/components/site/Marks";
 import { essaysQuery } from "@/lib/essays.query";
@@ -94,6 +95,8 @@ function EssayPage() {
   const shelf = SHELVES.find((s) => s.slug === essay.shelf);
   if (!shelf) throw notFound();
   const further = relatedIn(essays, essay);
+  const paper = paperForEssay(essay.slug);
+  const paperLink = paper ? paperHref(paper) : undefined;
   return (
     <article>
       <header className="essay-head">
@@ -107,6 +110,11 @@ function EssayPage() {
         <h1>{essay.title}</h1>
         <p className="dek">{essay.dek}</p>
         <div className="credit"><span className="a">David Rees Brown</span><span className="c">with Claude</span></div>
+        {paper && paperLink && (
+          <p className="paper-line">
+            The full argument: <a href={paperLink} {...ext}>{paper.title} →</a>
+          </p>
+        )}
         <div className="facts meta tnum">
           <span>{fmtMonth(essay.date, true)}</span>
           <span>{essay.readingMinutes} min read</span>
@@ -122,6 +130,9 @@ function EssayPage() {
           <div className="actions">
             <a href={essayUrl(essay)} {...ext} className="btn btn-primary">Discuss on Substack <span aria-hidden="true">↗</span></a>
             <a href={substackSubscribe} {...ext} className="btn btn-secondary">Subscribe free <span aria-hidden="true">↗</span></a>
+            {paper && paperLink && (
+              <a href={paperLink} {...ext} className="btn btn-secondary">Read the full paper <span aria-hidden="true">↗</span></a>
+            )}
           </div>
         </div>
       </div>

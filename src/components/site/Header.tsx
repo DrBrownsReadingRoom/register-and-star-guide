@@ -1,13 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SITE } from "@/config/site";
+import { PAPERS } from "@/content/papers";
 import { Emblem } from "./Emblem";
 
-type NavItem = { label: string; to: "/" | "/essays" | "/pensamientos" | "/books" | "/about"; exact?: boolean };
+type NavItem = { label: string; to: "/" | "/essays" | "/papers" | "/pensamientos" | "/books" | "/about"; exact?: boolean };
 
 const NAV: NavItem[] = [
   { label: "The Room", to: "/", exact: true },
   { label: "Essays", to: "/essays", exact: true },
+  // Hidden until the first paper arrives.
+  ...(PAPERS.length > 0 ? [{ label: "Papers", to: "/papers" } as NavItem] : []),
   { label: "Pensamientos", to: "/pensamientos" },
   { label: "Books", to: "/books" },
   { label: "About David", to: "/about" },
