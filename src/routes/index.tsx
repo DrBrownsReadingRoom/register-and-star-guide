@@ -66,7 +66,7 @@ function Index() {
         <div className="wrap door-in">
           <div>
             <p className="eyebrow"><i />Science · Philosophy · Reflections</p>
-            <h1>A private corner of the <em>library</em></h1>
+            <h1>A private corner of the <em>Library</em></h1>
             <p className="lede">For curious minds and unconventional questions.</p>
             <p className="motto">We're storytellers, not scientists. These are ideas, not facts.</p>
             <div className="actions">
