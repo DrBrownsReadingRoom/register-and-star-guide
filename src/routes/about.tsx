@@ -10,6 +10,8 @@ export const Route = createFileRoute("/about")({
       { name: "description", content: BIO_SHORT },
       { property: "og:title", content: "About David Rees Brown" },
       { property: "og:description", content: BIO_SHORT },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AboutPage,

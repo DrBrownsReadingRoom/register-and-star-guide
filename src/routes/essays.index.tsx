@@ -11,6 +11,8 @@ export const Route = createFileRoute("/essays/")({
       { name: "description", content: "Every essay in The Reading Room, searchable by title and filed by shelf." },
       { property: "og:title", content: "The Catalogue — The Reading Room" },
       { property: "og:description", content: "Every essay by David Rees Brown, catalogued and shelved." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(essaysQuery),

@@ -7,6 +7,7 @@ import { essaysQuery } from "@/lib/essays.query";
 import { LETTER } from "@/content/letter";
 import { Star } from "@/components/site/Marks";
 import { Sky } from "@/components/site/Sky";
+import { populatedShelves } from "@/lib/site-presentation";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -15,6 +16,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "A private corner of the library for curious minds and unconventional questions. Essays on science, philosophy and reflection by David Rees Brown, with Claude." },
       { property: "og:title", content: "The Reading Room — A private corner of the library" },
       { property: "og:description", content: "Essays on science, philosophy and reflection, shelved for the curious reader." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(essaysQuery),
@@ -24,21 +27,19 @@ export const Route = createFileRoute("/")({
 const ext = { target: "_blank", rel: "noopener" } as const;
 const plural = (n: number) => `${n} ${n === 1 ? "essay" : "essays"}`;
 
-/** A shelf spine: a link when the shelf holds essays, a quiet marker while it is empty. */
+/** Only populated shelves are rendered by the homepage. */
 function ShelfSpine({ shelf, cls, star, n }: { shelf: ShelfSlug; cls: string; star: string; n: number }) {
   const name = shelf.charAt(0).toUpperCase() + shelf.slice(1);
   const inner = (
     <>
       <span className="band" /><Star fill={star} className="em" />
       <span className="t">{name}</span>
-      <span className="c tnum">{n ? plural(n) : "Coming soon"}</span>
+      <span className="c tnum">{plural(n)}</span>
       <span className="band" />
     </>
   );
-  return n ? (
+  return (
     <Link to="/shelves/$shelf" params={{ shelf }} className={`spine ${cls}`}>{inner}</Link>
-  ) : (
-    <span className={`spine is-quiet ${cls}`} aria-disabled="true">{inner}</span>
   );
 }
 
@@ -47,6 +48,7 @@ function Index() {
   const feat = featuredOf(essays);
   const recent = byNewestOf(essays).filter((e) => e.slug !== feat.slug && e.slug !== "welcome-to-the-reading-room").slice(0, 3);
   const shelfName = { science: "Science", philosophy: "Philosophy", reflections: "Reflections" };
+  const visibleShelves = populatedShelves(essays).map((shelf) => shelf.slug);
 
   return (
     <>
@@ -97,10 +99,10 @@ function Index() {
           </div>
           <div className="shelf">
             <span className="spine dec d1" aria-hidden="true" />
-            {countOnIn(essays, "science") > 0 && <ShelfSpine shelf="science" cls="sp-navy" star="#B18B49" n={countOnIn(essays, "science")} />}
+            {visibleShelves.includes("science") && <ShelfSpine shelf="science" cls="sp-navy" star="#B18B49" n={countOnIn(essays, "science")} />}
             <span className="spine dec d2" aria-hidden="true" />
-            {countOnIn(essays, "philosophy") > 0 && <ShelfSpine shelf="philosophy" cls="sp-ivory" star="#B18B49" n={countOnIn(essays, "philosophy")} />}
-            {countOnIn(essays, "reflections") > 0 && <ShelfSpine shelf="reflections" cls="sp-slate" star="#E7D3A8" n={countOnIn(essays, "reflections")} />}
+            {visibleShelves.includes("philosophy") && <ShelfSpine shelf="philosophy" cls="sp-ivory" star="#B18B49" n={countOnIn(essays, "philosophy")} />}
+            {visibleShelves.includes("reflections") && <ShelfSpine shelf="reflections" cls="sp-slate" star="#E7D3A8" n={countOnIn(essays, "reflections")} />}
             <span className="spine dec d3" aria-hidden="true" />
             <Link to="/books" className="spine sp-gold">
               <span className="band" /><Star fill="#071D30" className="em" /><span className="t">The Books</span><span className="c">In preparation</span><span className="band" />

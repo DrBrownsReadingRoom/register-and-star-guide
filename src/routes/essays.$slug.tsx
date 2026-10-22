@@ -23,6 +23,7 @@ export const Route = createFileRoute("/essays/$slug")({
         { property: "og:title", content: essay.title },
         { property: "og:description", content: essay.excerpt },
         { property: "og:type", content: "article" },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [{ rel: "canonical", href: essayUrl(essay) }],
     };
@@ -90,7 +91,8 @@ function Body({ text }: { text: string }) {
 function EssayPage() {
   const { essay } = Route.useLoaderData();
   const { data: essays } = useSuspenseQuery(essaysQuery);
-  const shelf = SHELVES.find((s) => s.slug === essay.shelf)!;
+  const shelf = SHELVES.find((s) => s.slug === essay.shelf);
+  if (!shelf) throw notFound();
   const further = relatedIn(essays, essay);
   return (
     <article>
@@ -128,9 +130,8 @@ function EssayPage() {
         <ol>
           {further.map((e) => (
             <li key={e.slug}>
-              <span className="label tnum">RR · {e.no}</span>
               <Link to="/essays/$slug" params={{ slug: e.slug }}>{e.title}</Link>
-              <span className="meta">{SHELVES.find((s) => s.slug === e.shelf)!.name}</span>
+              <span className="meta">{SHELVES.find((s) => s.slug === e.shelf)?.name}</span>
             </li>
           ))}
         </ol>
