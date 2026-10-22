@@ -25,6 +25,7 @@
 .door h1{font-size:clamp(44px,6.6vw,80px);font-weight:600;color:var(--ivory);margin-top:22px;max-width:12ch}
 .door h1 em{font-style:italic;font-weight:400;color:#E7D3A8}
 .door .lede{font:400 21px/1.55 var(--font-reading);color:rgba(249,247,240,.84);max-width:34ch;margin-top:22px}
+.door .motto{font:italic 400 19px/1.55 var(--font-reading);color:rgba(249,247,240,.84);max-width:42ch;margin-top:10px}
 .door .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
 .door .btn-primary{background:var(--ivory);color:var(--navy);border-color:var(--ivory)}
 .door .btn-primary:hover{background:#fff;border-color:var(--gold)}
@@ -148,7 +149,7 @@ a.spine:hover,a.spine:focus-visible{transform:translateY(-14px);box-shadow:inset
 .find input:focus{outline:none}
 .find:focus-within{border-bottom-color:var(--gold);box-shadow:0 1px 0 var(--gold)}
 .ledger{list-style:none;margin:0;padding:0}
-.row{display:grid;grid-template-columns:92px minmax(0,1fr) 150px;gap:24px;padding-block:28px;border-bottom:1px solid var(--rule);align-items:start}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:24px;padding-block:28px;border-bottom:1px solid var(--rule);align-items:start}
 .row .no{font:600 13px/1.6 var(--font-ui);letter-spacing:.1em;color:var(--slate)}
 .row h3,.row .row-title{font-size:clamp(24px,2.6vw,30px);font-weight:500}
 .row .row-title a{text-decoration:none}
@@ -187,7 +188,7 @@ a.spine:hover,a.spine:focus-visible{transform:translateY(-14px);box-shadow:inset
 .further{max-width:var(--reading-width);margin:0 auto;padding:0 var(--gutter) 96px}
 .further h2{font-size:26px;font-weight:500;margin-bottom:18px}
 .further ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
-.further li{display:grid;grid-template-columns:80px minmax(0,1fr) auto;gap:18px;padding:18px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.further li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;padding:18px 0;border-bottom:1px solid var(--rule);align-items:baseline}
 .further li a{font:500 22px/1.25 var(--font-display);text-decoration:none}
 .further li a:hover{text-decoration:underline;text-decoration-color:var(--gold)}
 @media (max-width:640px){.further li{grid-template-columns:1fr}}

@@ -6,7 +6,7 @@ export const BIO_LEAD =
 
 export const BIO_BODY = [
   "His writing explores science, philosophy, consciousness, cosmology, and the limits of what humans can truly know.",
-  "A former Washington correspondent and chief of staff to a Pennsylvania governor, he brings a reporter’s skepticism and a sailor’s instinct for remembering that the chart is only our description of the ocean—not the ocean itself.",
+  "He brings a reporter's skepticism and a sailor’s instinct for remembering that the chart is only our description of the ocean—not the ocean itself.",
   "His work is written for curious readers rather than specialists: no equations, no academic gatekeeping, and no requirement that accepted ideas be accepted without examination.",
 ];
 

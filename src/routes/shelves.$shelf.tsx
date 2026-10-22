@@ -20,6 +20,8 @@ export const Route = createFileRoute("/shelves/$shelf")({
         { name: "description", content: `Essays filed on the ${name} shelf, by David Rees Brown.` },
         { property: "og:title", content: `The ${name} shelf — The Reading Room` },
         { property: "og:description", content: `Essays shelved under ${name.toLowerCase()}.` },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
     };
   },

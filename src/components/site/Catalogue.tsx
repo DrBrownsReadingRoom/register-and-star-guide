@@ -4,7 +4,7 @@ import { byNewestOf, essayUrl, fmtMonth, type Essay } from "@/content/essays";
 import { SHELVES, substackArchive, type ShelfSlug } from "@/config/site";
 
 const ext = { target: "_blank", rel: "noopener" } as const;
-const nameOf = (s: ShelfSlug) => SHELVES.find((x) => x.slug === s)!.name;
+const nameOf = (s: ShelfSlug) => SHELVES.find((x) => x.slug === s)?.name ?? s;
 
 export function Catalogue({ essays, shelf: initial, focusSearch }: { essays: Essay[]; shelf?: ShelfSlug; focusSearch?: boolean }) {
   const [shelf, setShelf] = useState<ShelfSlug | "all">(initial ?? "all");
@@ -47,7 +47,6 @@ export function Catalogue({ essays, shelf: initial, focusSearch }: { essays: Ess
       <ol className="ledger">
         {list.map((e) => (
           <li key={e.slug} className="row">
-            <span className="no tnum">RR · {e.no}</span>
             <div style={{ minWidth: 0 }}>
               <h2 className="row-title">
                 <Link to="/essays/$slug" params={{ slug: e.slug }}>{e.title}</Link>

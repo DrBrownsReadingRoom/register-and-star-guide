@@ -25,6 +25,7 @@ export function Footer() {
           <ul className="space-y-3">
             <li><Link to="/" className={colLink}>Home</Link></li>
             <li><Link to="/essays" className={colLink}>Catalogue</Link></li>
+            <li><Link to="/essays" search={{ focus: 1 }} className={colLink}>Search</Link></li>
             <li><Link to="/about" className={colLink}>About David</Link></li>
           </ul>
         </nav>
@@ -33,7 +34,7 @@ export function Footer() {
           <ul className="space-y-3">
             <li><a href={SITE.substack} {...ext} className={colLink}>Substack ↗</a></li>
             <li><a href={substackArchive} {...ext} className={colLink}>Essay archive ↗</a></li>
-            <li><a href={SITE.amazonBook} {...ext} className={colLink}>The book on Amazon ↗</a></li>
+            <li><Link to="/books" className={colLink}>Books</Link></li>
           </ul>
         </nav>
         <nav aria-label="Shelves">
@@ -47,7 +48,7 @@ export function Footer() {
       </div>
       <div className="border-t border-ivory/15">
         <div className="mx-auto flex max-w-[1280px] flex-col justify-between gap-3 px-6 py-6 font-ui text-[14px] text-ivory/75 sm:flex-row">
-          <p>© 2026 David Rees Brown. Essays written with research assistance from Claude.</p>
+          <p>© 2026 David Rees Brown. Written with Claude.</p>
           <a href="#top" className="text-ivory/85 no-underline hover:underline hover:decoration-gold underline-offset-4">
             Back to the entrance ↑
           </a>
