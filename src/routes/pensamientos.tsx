@@ -30,6 +30,7 @@ function PensamientosPage() {
             <div>
               <p className="pensamiento-text">{line.text}</p>
               {line.essaySlug && <Link to="/essays/$slug" params={{ slug: line.essaySlug }} className="pensamiento-link pensamiento-source">From the essay →</Link>}
+              {line.paperSlug && <Link to="/papers/$slug" params={{ slug: line.paperSlug }} className="pensamiento-link pensamiento-source">From the paper →</Link>}
             </div>
           </li>
         ))}
