@@ -12,10 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as BooksRouteImport } from './routes/books'
-import { Route as PapersRouteImport } from './routes/papers'
 import { Route as PensamientosRouteImport } from './routes/pensamientos'
 import { Route as EssaysIndexRouteImport } from './routes/essays.index'
 import { Route as EssaysSlugRouteImport } from './routes/essays.$slug'
+import { Route as PapersIndexRouteImport } from './routes/papers.index'
 import { Route as ShelvesShelfRouteImport } from './routes/shelves.$shelf'
 
 const IndexRoute = IndexRouteImport.update({
@@ -33,11 +33,6 @@ const BooksRoute = BooksRouteImport.update({
   path: '/books',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PapersRoute = PapersRouteImport.update({
-  id: '/papers',
-  path: '/papers',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PensamientosRoute = PensamientosRouteImport.update({
   id: '/pensamientos',
   path: '/pensamientos',
@@ -53,6 +48,11 @@ const EssaysSlugRoute = EssaysSlugRouteImport.update({
   path: '/essays/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PapersIndexRoute = PapersIndexRouteImport.update({
+  id: '/papers/',
+  path: '/papers/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShelvesShelfRoute = ShelvesShelfRouteImport.update({
   id: '/shelves/$shelf',
   path: '/shelves/$shelf',
@@ -63,32 +63,32 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/books': typeof BooksRoute
-  '/papers': typeof PapersRoute
   '/pensamientos': typeof PensamientosRoute
   '/essays/$slug': typeof EssaysSlugRoute
   '/shelves/$shelf': typeof ShelvesShelfRoute
   '/essays/': typeof EssaysIndexRoute
+  '/papers/': typeof PapersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/books': typeof BooksRoute
-  '/papers': typeof PapersRoute
   '/pensamientos': typeof PensamientosRoute
   '/essays/$slug': typeof EssaysSlugRoute
   '/shelves/$shelf': typeof ShelvesShelfRoute
   '/essays': typeof EssaysIndexRoute
+  '/papers': typeof PapersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/books': typeof BooksRoute
-  '/papers': typeof PapersRoute
   '/pensamientos': typeof PensamientosRoute
   '/essays/$slug': typeof EssaysSlugRoute
   '/shelves/$shelf': typeof ShelvesShelfRoute
   '/essays/': typeof EssaysIndexRoute
+  '/papers/': typeof PapersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -96,42 +96,42 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/books'
-    | '/papers'
     | '/pensamientos'
     | '/essays/$slug'
     | '/shelves/$shelf'
     | '/essays/'
+    | '/papers/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/books'
-    | '/papers'
     | '/pensamientos'
     | '/essays/$slug'
     | '/shelves/$shelf'
     | '/essays'
+    | '/papers'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/books'
-    | '/papers'
     | '/pensamientos'
     | '/essays/$slug'
     | '/shelves/$shelf'
     | '/essays/'
+    | '/papers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   BooksRoute: typeof BooksRoute
-  PapersRoute: typeof PapersRoute
   PensamientosRoute: typeof PensamientosRoute
   EssaysSlugRoute: typeof EssaysSlugRoute
   ShelvesShelfRoute: typeof ShelvesShelfRoute
   EssaysIndexRoute: typeof EssaysIndexRoute
+  PapersIndexRoute: typeof PapersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -157,13 +157,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BooksRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/papers': {
-      id: '/papers'
-      path: '/papers'
-      fullPath: '/papers'
-      preLoaderRoute: typeof PapersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/pensamientos': {
       id: '/pensamientos'
       path: '/pensamientos'
@@ -185,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EssaysSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/papers/': {
+      id: '/papers/'
+      path: '/papers'
+      fullPath: '/papers/'
+      preLoaderRoute: typeof PapersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shelves/$shelf': {
       id: '/shelves/$shelf'
       path: '/shelves/$shelf'
@@ -199,11 +199,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   BooksRoute: BooksRoute,
-  PapersRoute: PapersRoute,
   PensamientosRoute: PensamientosRoute,
   EssaysSlugRoute: EssaysSlugRoute,
   ShelvesShelfRoute: ShelvesShelfRoute,
   EssaysIndexRoute: EssaysIndexRoute,
+  PapersIndexRoute: PapersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PAPERS, paperHref, type Paper } from "@/content/papers";
+import { PAPERS, isOutside, paperHref, type Paper } from "@/content/papers";
 import { fmtMonth } from "@/content/essays";
 
-export const Route = createFileRoute("/papers")({
+export const Route = createFileRoute("/papers/")({
   head: () => ({
     meta: [
       { title: "Papers — The Reading Room" },
@@ -20,19 +20,30 @@ const ext = { target: "_blank", rel: "noopener" } as const;
 
 function PaperRow({ p }: { p: Paper }) {
   const href = paperHref(p);
+  const outside = isOutside(href);
+  const open = (label: React.ReactNode) =>
+    outside ? <a href={href} {...ext}>{label}</a> : <Link to="/papers/$slug" params={{ slug: p.slug }}>{label}</Link>;
+  const essays = p.essaySlugs ?? [];
   return (
     <li className="row has-no">
       <span className="no tnum">{p.no}</span>
       <div style={{ minWidth: 0 }}>
-        <h2 className="row-title">{href ? <a href={href} {...ext}>{p.title}</a> : p.title}</h2>
+        <h2 className="row-title">{open(p.title)}</h2>
+        {p.subtitle && <p className="row-sub">{p.subtitle}</p>}
         <p className="ex">{p.abstract}</p>
         <div className="links">
-          {href && <a href={href} {...ext}>Read the paper ↗</a>}
-          {p.essaySlug && <Link to="/essays/$slug" params={{ slug: p.essaySlug }}>The short version →</Link>}
+          {open(outside ? "Read the paper ↗" : "Read the paper →")}
+          {essays.length === 1 && <Link to="/essays/$slug" params={{ slug: essays[0]! }}>The short version →</Link>}
+          {essays.length > 1 && (
+            <Link to="/papers/$slug" params={{ slug: p.slug }} hash="short-versions">
+              The short versions ({essays.length}) →
+            </Link>
+          )}
         </div>
       </div>
       <div className="side">
         <span className="tnum">{fmtMonth(p.date)}</span>
+        {p.readingMinutes && <span className="tnum">{p.readingMinutes} min read</span>}
       </div>
     </li>
   );
@@ -46,7 +57,7 @@ function PapersPage() {
         <h1>The longer arguments</h1>
         <p>Each essay starts as a full paper. These are the papers, for readers who want the whole case.</p>
       </div>
-      <div className="wrap">
+      <div className="wrap" style={{ paddingBottom: 96 }}>
         <ol className="ledger">
           {PAPERS.map((p) => (
             <PaperRow key={p.no} p={p} />

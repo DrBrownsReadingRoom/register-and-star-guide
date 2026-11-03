@@ -73,7 +73,7 @@ export function Catalogue({ essays, shelf: initial, focusSearch }: { essays: Ess
         )}
       </ol>
       <div className="flex flex-wrap items-center justify-between gap-4 pb-24 pt-14">
-        <p className="meta max-w-[52ch]">The complete archive, including comments and earlier drafts, lives on Substack.</p>
+        <p className="meta max-w-[52ch]">Comments, discussion and new essays by email live on Substack.</p>
         <a href={substackArchive} {...ext} className="btn btn-primary">Browse the Substack archive <span aria-hidden="true">↗</span></a>
       </div>
     </div>
