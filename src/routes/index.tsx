@@ -89,7 +89,7 @@ function Index() {
             <p className="meta tnum" style={{ marginTop: 18 }}>{feat.readingMinutes} min read</p>
             <div className="actions">
               <Link to="/essays/$slug" params={{ slug: feat.slug }} className="btn btn-primary">Read the essay <span className="arr" aria-hidden="true">→</span></Link>
-              <a href={essayUrl(feat)} {...ext} className="btn btn-secondary">Discuss on Substack <span aria-hidden="true">↗</span></a>
+              {essayUrl(feat) && <a href={essayUrl(feat)} {...ext} className="btn btn-secondary">Discuss on Substack <span aria-hidden="true">↗</span></a>}
             </div>
           </div>
         </div>

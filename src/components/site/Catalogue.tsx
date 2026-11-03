@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { byNewestOf, essayUrl, fmtMonth, type Essay } from "@/content/essays";
+import { byNewestOf, essayUrl, fmtMonth, type EssayCard } from "@/content/essays";
 import { SHELVES, substackArchive, type ShelfSlug } from "@/config/site";
 
 const ext = { target: "_blank", rel: "noopener" } as const;
 const nameOf = (s: ShelfSlug) => SHELVES.find((x) => x.slug === s)?.name ?? s;
 
-export function Catalogue({ essays, shelf: initial, focusSearch }: { essays: Essay[]; shelf?: ShelfSlug; focusSearch?: boolean }) {
+export function Catalogue({ essays, shelf: initial, focusSearch }: { essays: EssayCard[]; shelf?: ShelfSlug; focusSearch?: boolean }) {
   const [shelf, setShelf] = useState<ShelfSlug | "all">(initial ?? "all");
   const [q, setQ] = useState("");
   const ref = useRef<HTMLInputElement>(null);
@@ -54,7 +54,7 @@ export function Catalogue({ essays, shelf: initial, focusSearch }: { essays: Ess
               <p className="ex">{e.excerpt}</p>
               <div className="links">
                 <Link to="/essays/$slug" params={{ slug: e.slug }}>Read here</Link>
-                <a href={essayUrl(e)} {...ext}>On Substack ↗</a>
+                {essayUrl(e) && <a href={essayUrl(e)} {...ext}>On Substack ↗</a>}
               </div>
             </div>
             <div className="side">

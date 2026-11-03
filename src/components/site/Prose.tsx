@@ -1,4 +1,4 @@
-import { Fragment, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 
 /**
@@ -116,5 +116,3 @@ export function Prose({ text, quoteCite = "From the essay" }: { text: string; qu
     </>
   );
 }
-
-export const ProseFragment = Fragment;
