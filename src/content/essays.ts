@@ -15,6 +15,8 @@ export interface Essay {
   plateArt?: "slits" | "waves";
   plate?: string;
   substackUrl?: string;
+  /** In David's collection on this site but not (yet) published on Substack. */
+  local?: boolean;
   /** Blocks separated by blank lines. "## " = heading, "> " = pull quote. */
   body: string;
   related?: string[];
@@ -96,16 +98,22 @@ Subscribe if you’d like the next one in your inbox. And welcome.
 /** The live catalogue is read from Substack on every visit (src/lib/essays.functions.ts).
  *  ESSAYS above is the offline snapshot: served only when Substack cannot be reached. */
 
-export const byNewestOf = (list: Essay[]) => [...list].sort((a, b) => b.date.localeCompare(a.date));
-export const findIn = (list: Essay[], slug: string) => list.find((e) => e.slug === slug);
-export const featuredOf = (list: Essay[]) => (list.find((e) => e.featured) ?? byNewestOf(list)[0])!;
-export const essayUrl = (e: Essay) => e.substackUrl ?? substackPost(e.slug);
-export const countOnIn = (list: Essay[], shelf: ShelfSlug) => list.filter((e) => e.shelf === shelf).length;
+/** An essay as listed in the catalogue: everything but the text itself. */
+export type EssayCard = Omit<Essay, "body">;
+
+/** Newest first; essays added on the same day go highest number first. */
+export const byNewestOf = <T extends EssayCard>(list: T[]) =>
+  [...list].sort((a, b) => b.date.localeCompare(a.date) || b.no.localeCompare(a.no));
+export const findIn = <T extends EssayCard>(list: T[], slug: string) => list.find((e) => e.slug === slug);
+export const featuredOf = <T extends EssayCard>(list: T[]) => (list.find((e) => e.featured) ?? byNewestOf(list)[0])!;
+/** The essay's Substack page, or nothing for an essay that lives only in the Room. */
+export const essayUrl = (e: EssayCard): string | undefined => e.substackUrl ?? (e.local ? undefined : substackPost(e.slug));
+export const countOnIn = (list: EssayCard[], shelf: ShelfSlug) => list.filter((e) => e.shelf === shelf).length;
 export const fmtMonth = (iso: string, long = false) =>
   new Date(iso + "T00:00:00Z").toLocaleDateString("en-GB", { month: long ? "long" : "short", year: "numeric", timeZone: "UTC" });
 
-export function relatedIn(list: Essay[], e: Essay): Essay[] {
-  const picked = (e.related ?? []).map((s) => findIn(list, s)).filter((x): x is Essay => !!x);
+export function relatedIn<T extends EssayCard>(list: T[], e: EssayCard): T[] {
+  const picked = (e.related ?? []).map((s) => findIn(list, s)).filter((x): x is T => !!x);
   const rest = byNewestOf(list).filter((x) => x.slug !== e.slug && !picked.includes(x));
   rest.sort((a, b) => Number(b.shelf === e.shelf) - Number(a.shelf === e.shelf));
   return [...picked, ...rest].slice(0, 3);

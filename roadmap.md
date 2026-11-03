@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Add every essay and paper from David's collection file (2026-11-03): 93 essays (file No. n shown as RR n+1, The Road So Far as RR 094) filed on Science/Philosophy/Reflections, 21 papers with their own reading pages, essay ↔ paper links.
+
 - [x] Add academic papers: `src/content/papers.ts` (empty for now), /papers page ("The longer arguments"), essay-page "full argument" links, header link hidden until the first paper arrives, footer link under The Room.
 - [x] Add Pensamientos: eight supplied lines, UTC daily homepage band, ruled collection page and header/footer links.
 
@@ -17,4 +19,4 @@
 - A final description for the book on /books; the placeholder marker is removed while the book is in preparation.
 - Title and description for the second (in-preparation) book. Its "In the workshop" section was removed from /books on 2026-10-09 at Mia's request; re-add it to `BOOKS` in src/content/books.ts and the workshop block in src/routes/books.tsx when the details are confirmed.
 - Whether the Substack tagline "Essays on physics, power, and the money behind both. For the fans, not the players." should be used anywhere on the site.
-- Whether the "Recent reading" card row should reappear on the homepage as more essays arrive (it is hidden while only two posts are live), and whether the welcome note should ever appear there.
+- Confirm the shelf filing chosen for the 93 collection essays, and whether in-text references like "No. 67" should be renumbered to match the site's RR numbers (file No. n = RR n+1).

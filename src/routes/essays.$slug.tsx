@@ -1,22 +1,26 @@
-import type { ReactNode } from "react";
+import { Fragment } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { essayUrl, findIn, fmtMonth, relatedIn } from "@/content/essays";
-import { paperForEssay, paperHref } from "@/content/papers";
+import { essayUrl, fmtMonth, relatedIn } from "@/content/essays";
+import { isOutside, paperHref, papersForEssay, type Paper } from "@/content/papers";
 import { SHELVES, substackSubscribe } from "@/config/site";
 import { StarRule } from "@/components/site/Marks";
-import { essaysQuery } from "@/lib/essays.query";
+import { Prose } from "@/components/site/Prose";
+import { essayQuery, essaysQuery } from "@/lib/essays.query";
 
 export const Route = createFileRoute("/essays/$slug")({
   loader: async ({ params, context }) => {
-    const essays = await context.queryClient.ensureQueryData(essaysQuery);
-    const essay = findIn(essays, params.slug);
+    const [, essay] = await Promise.all([
+      context.queryClient.ensureQueryData(essaysQuery),
+      context.queryClient.ensureQueryData(essayQuery(params.slug)),
+    ]);
     if (!essay) throw notFound();
     return { essay };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return { meta: [{ title: "Not found — The Reading Room" }, { name: "robots", content: "noindex" }] };
     const { essay } = loaderData;
+    const url = essayUrl(essay);
     return {
       meta: [
         { title: `${essay.title} · The Reading Room` },
@@ -26,7 +30,7 @@ export const Route = createFileRoute("/essays/$slug")({
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
-      links: [{ rel: "canonical", href: essayUrl(essay) }],
+      links: url ? [{ rel: "canonical", href: url }] : [],
     };
   },
   component: EssayPage,
@@ -34,69 +38,23 @@ export const Route = createFileRoute("/essays/$slug")({
 
 const ext = { target: "_blank", rel: "noopener" } as const;
 
-const TOKEN = /\*\*[^*]+\*\*|_[^_]+_|\[[^\]]+\]\([^)\s]+\)/g;
-
-/** Bold, italic and links — the only marks an essay body is allowed to carry. */
-function inline(text: string): ReactNode[] {
-  const out: ReactNode[] = [];
-  let last = 0;
-  for (const m of text.matchAll(TOKEN)) {
-    const at = m.index ?? 0;
-    if (at > last) out.push(text.slice(last, at));
-    const t = m[0];
-    if (t.startsWith("**")) out.push(<strong key={at}>{t.slice(2, -2)}</strong>);
-    else if (t.startsWith("_")) out.push(<em key={at}>{t.slice(1, -1)}</em>);
-    else {
-      const link = /^\[([^\]]+)\]\(([^)\s]+)\)$/.exec(t);
-      const href = link?.[2] ?? "";
-      const label = link?.[1] ?? t;
-      if (/^https?:\/\//i.test(href))
-        out.push(
-          <a key={at} href={href} target="_blank" rel="noopener noreferrer">
-            {label}
-          </a>,
-        );
-      else out.push(label);
-    }
-    last = at + t.length;
-  }
-  if (last < text.length) out.push(text.slice(last));
-  return out;
-}
-
-function Body({ text }: { text: string }) {
-  let first = true;
-  return (
-    <>
-      {text.split(/\n\s*\n/).map((raw, i) => {
-        const b = raw.trim();
-        if (b.startsWith("## ")) return <h2 key={i}>{b.slice(3)}</h2>;
-        if (b.startsWith("> "))
-          return (
-            <aside key={i} className="pull">
-              “{b.slice(2)}”<cite>From the essay</cite>
-            </aside>
-          );
-        const cls = first ? "first" : undefined;
-        first = false;
-        return (
-          <p key={i} className={cls}>
-            {inline(b)}
-          </p>
-        );
-      })}
-    </>
-  );
+/** A paper on this site opens in place; one hosted elsewhere opens in a new tab. */
+function PaperLink({ p, className, children }: { p: Paper; className?: string; children: React.ReactNode }) {
+  const href = paperHref(p);
+  if (isOutside(href)) return <a href={href} {...ext} className={className}>{children}</a>;
+  return <Link to="/papers/$slug" params={{ slug: p.slug }} className={className}>{children}</Link>;
 }
 
 function EssayPage() {
-  const { essay } = Route.useLoaderData();
+  const { slug } = Route.useParams();
   const { data: essays } = useSuspenseQuery(essaysQuery);
+  const { data: essay } = useSuspenseQuery(essayQuery(slug));
+  if (!essay) throw notFound();
   const shelf = SHELVES.find((s) => s.slug === essay.shelf);
   if (!shelf) throw notFound();
   const further = relatedIn(essays, essay);
-  const paper = paperForEssay(essay.slug);
-  const paperLink = paper ? paperHref(paper) : undefined;
+  const papers = papersForEssay(essay.slug);
+  const substack = essayUrl(essay);
   return (
     <article>
       <header className="essay-head">
@@ -110,9 +68,15 @@ function EssayPage() {
         <h1>{essay.title}</h1>
         <p className="dek">{essay.dek}</p>
         <div className="credit"><span className="a">David Rees Brown</span><span className="c">with Claude</span></div>
-        {paper && paperLink && (
+        {papers.length > 0 && (
           <p className="paper-line">
-            The full argument: <a href={paperLink} {...ext}>{paper.title} →</a>
+            The full argument:{" "}
+            {papers.map((p, i) => (
+              <Fragment key={p.slug}>
+                {i > 0 && <span aria-hidden="true"> · </span>}
+                <PaperLink p={p}>{p.title} →</PaperLink>
+              </Fragment>
+            ))}
           </p>
         )}
         <div className="facts meta tnum">
@@ -123,15 +87,21 @@ function EssayPage() {
       </header>
       <div className="wrap" style={{ maxWidth: "var(--reading-width)" }}><StarRule /></div>
       <div className="essay-body" style={{ marginTop: 48 }}>
-        <Body text={essay.body} />
+        <Prose text={essay.body} />
         <div className="ask">
           <p className="label gold">Continue the conversation</p>
-          <p>This essay is also published on Substack, where readers leave comments and new essays arrive by email.</p>
+          <p>
+            {substack
+              ? "This essay is also published on Substack, where readers leave comments and new essays arrive by email."
+              : "New essays are published on Substack, where readers leave comments and new essays arrive by email."}
+          </p>
           <div className="actions">
-            <a href={essayUrl(essay)} {...ext} className="btn btn-primary">Discuss on Substack <span aria-hidden="true">↗</span></a>
-            <a href={substackSubscribe} {...ext} className="btn btn-secondary">Subscribe free <span aria-hidden="true">↗</span></a>
-            {paper && paperLink && (
-              <a href={paperLink} {...ext} className="btn btn-secondary">Read the full paper <span aria-hidden="true">↗</span></a>
+            {substack && <a href={substack} {...ext} className="btn btn-primary">Discuss on Substack <span aria-hidden="true">↗</span></a>}
+            <a href={substackSubscribe} {...ext} className={substack ? "btn btn-secondary" : "btn btn-primary"}>Subscribe free <span aria-hidden="true">↗</span></a>
+            {papers[0] && (
+              <PaperLink p={papers[0]} className="btn btn-secondary">
+                Read the full paper <span aria-hidden="true">{isOutside(paperHref(papers[0])) ? "↗" : "→"}</span>
+              </PaperLink>
             )}
           </div>
         </div>

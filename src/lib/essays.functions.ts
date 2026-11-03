@@ -1,7 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
-import { ESSAYS, type Essay } from "@/content/essays";
+import { ESSAYS, type Essay, type EssayCard } from "@/content/essays";
 import { DEFAULT_SHELF, ESSAY_META } from "@/content/essays.meta";
-import { buildCatalogue } from "./essays.sync";
+import { loadLibraryEssays, loadPaperTexts } from "@/content/library";
+import { buildFullCatalogue, libraryFiling, mergeLibrary } from "./essays.sync";
 import { fetchFeed } from "./substack.server";
 
 /** A post is worth re-reading within this window; after it, ask Substack again. */
@@ -15,7 +16,8 @@ async function loadEssays(): Promise<Essay[]> {
   if (!inflight) {
     inflight = (async () => {
       try {
-        const essays = buildCatalogue(await fetchFeed(), ESSAY_META, DEFAULT_SHELF);
+        const library = await loadLibraryEssays();
+        const essays = buildFullCatalogue(await fetchFeed(), ESSAY_META, library, DEFAULT_SHELF);
         if (!essays.length) throw new Error("Substack's list held no posts");
         cache = { at: Date.now(), essays };
         return essays;
@@ -30,16 +32,42 @@ async function loadEssays(): Promise<Essay[]> {
   return inflight;
 }
 
-/**
- * The catalogue the site shows: whatever is live on Substack right now, filed
- * with the overrides in src/content/essays.meta.ts. Falls back to the last good
- * read, and only then to the snapshot kept in src/content/essays.ts.
- */
-export const getEssays = createServerFn({ method: "GET" }).handler(async (): Promise<Essay[]> => {
+/** Substack unreachable: the offline snapshot plus the whole collection. */
+async function offline(): Promise<Essay[]> {
+  const library = await loadLibraryEssays();
+  return mergeLibrary(ESSAYS, library, libraryFiling([], ESSAY_META, library));
+}
+
+async function everyEssay(): Promise<Essay[]> {
   try {
     return await loadEssays();
   } catch (err) {
     console.error("The Reading Room: Substack could not be read; serving the offline catalogue.", err);
-    return ESSAYS;
+    return offline();
   }
-});
+}
+
+const slugInput = (d: unknown) => {
+  const slug = (d as { slug?: unknown } | null)?.slug;
+  if (typeof slug !== "string" || !slug || slug.length > 200) throw new Error("A slug is required");
+  return { slug };
+};
+
+/**
+ * The catalogue the site shows: whatever is live on Substack right now plus David's
+ * collection, filed with the overrides in src/content/essays.meta.ts. The text of each
+ * essay is left out here and fetched one essay at a time by getEssay.
+ */
+export const getEssays = createServerFn({ method: "GET" }).handler(async (): Promise<EssayCard[]> =>
+  (await everyEssay()).map(({ body: _body, ...card }) => card),
+);
+
+/** One essay with its text, or null if there is no such essay. */
+export const getEssay = createServerFn({ method: "GET" })
+  .validator(slugInput)
+  .handler(async ({ data }): Promise<Essay | null> => (await everyEssay()).find((e) => e.slug === data.slug) ?? null);
+
+/** The full text of one paper, or null if there is none. */
+export const getPaperText = createServerFn({ method: "GET" })
+  .validator(slugInput)
+  .handler(async ({ data }): Promise<string | null> => (await loadPaperTexts())[data.slug] ?? null);
