@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import logo from "@/assets/reading-room-logo.png.asset.json";
+const logo = { url: "/images/reading-room-logo.png" };
 import { SITE, type ShelfSlug } from "@/config/site";
 import { byNewestOf, countOnIn, essayUrl, featuredOf, fmtMonth } from "@/content/essays";
 import { essaysQuery } from "@/lib/essays.query";
