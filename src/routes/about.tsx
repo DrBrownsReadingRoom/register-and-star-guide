@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SITE } from "@/config/site";
 import { BIO_ASK_LEAD, BIO_BODY, BIO_LEAD, BIO_QUESTION, BIO_SHORT } from "@/content/bio";
-import portraitAsset from "@/assets/david-rees-brown.jpg.asset.json";
+const portraitAsset = { url: "/images/david-rees-brown.jpg" };
 
 export const Route = createFileRoute("/about")({
   head: () => ({
