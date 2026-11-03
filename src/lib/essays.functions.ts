@@ -64,10 +64,10 @@ export const getEssays = createServerFn({ method: "GET" }).handler(async (): Pro
 
 /** One essay with its text, or null if there is no such essay. */
 export const getEssay = createServerFn({ method: "GET" })
-  .inputValidator(slugInput)
+  .validator(slugInput)
   .handler(async ({ data }): Promise<Essay | null> => (await everyEssay()).find((e) => e.slug === data.slug) ?? null);
 
 /** The full text of one paper, or null if there is none. */
 export const getPaperText = createServerFn({ method: "GET" })
-  .inputValidator(slugInput)
+  .validator(slugInput)
   .handler(async ({ data }): Promise<string | null> => (await loadPaperTexts())[data.slug] ?? null);
