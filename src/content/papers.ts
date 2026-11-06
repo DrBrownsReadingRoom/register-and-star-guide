@@ -284,8 +284,19 @@ export const PAPERS: Paper[] = [
     readingMinutes: 40,
     essaySlugs: [],
   },
+  {
+    no: "022",
+    slug: "nothing-to-understand",
+    title: "Nothing to Understand",
+    subtitle: "Quantum Theory and the Promotion of Description",
+    kind: "A proposal in natural philosophy",
+    abstract: "Quantum theory is often called the most successful theory in science and the least understood. We propose that these two descriptions belong to different things. The success belongs to experiments: observations, repeated and recorded, whose results come out the same every time.",
+    credit: "Created by David Rees Brown. Described by Claude.",
+    date: "2026-11-06",
+    readingMinutes: 30,
+    essaySlugs: [],
+  },
 ];
-
 /** An outside host or a PDF if one is set; otherwise the paper's own page on this site. */
 export const paperHref = (p: Paper) => p.url ?? p.pdf ?? `/papers/${p.slug}`;
 export const isOutside = (href: string) => /^https?:\/\//i.test(href) || href.endsWith(".pdf");

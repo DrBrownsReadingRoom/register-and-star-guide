@@ -5,11 +5,11 @@ import library from "@/content/library/papers.json";
 const base = { no: "001", slug: "t", title: "T", abstract: "A", date: "2026-10-01" };
 
 describe("papers", () => {
-  it("holds all 21 papers from David's collection, numbered 001 to 021", () => {
-    expect(PAPERS).toHaveLength(21);
-    expect(PAPERS.map((p) => p.no)).toEqual(Array.from({ length: 21 }, (_, i) => String(i + 1).padStart(3, "0")));
+  it("holds all 22 papers from David's collection, numbered 001 to 022", () => {
+    expect(PAPERS).toHaveLength(22);
+    expect(PAPERS.map((p) => p.no)).toEqual(Array.from({ length: 22 }, (_, i) => String(i + 1).padStart(3, "0")));
     expect(PAPERS[0]!.title).toBe("Reality Exists, Knowledge Is Authored");
-    expect(PAPERS[20]!.title).toBe("Danger Lurks in Empty Spaces");
+    expect(PAPERS[21]!.title).toBe("Nothing to Understand");
   });
 
   it("has the full text of every listed paper", () => {
