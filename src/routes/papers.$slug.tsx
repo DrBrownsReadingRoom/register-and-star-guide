@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { findIn, fmtMonth } from "@/content/essays";
-import { findPaper } from "@/content/papers";
+import { findPaper, doiLabel } from "@/content/papers";
 import { SHELVES } from "@/config/site";
 import { StarRule } from "@/components/site/Marks";
 import { inline, Prose } from "@/components/site/Prose";
@@ -58,6 +58,13 @@ function PaperPage() {
           <span>{fmtMonth(paper.date, true)}</span>
           {paper.readingMinutes && <span>{paper.readingMinutes} min read</span>}
         </div>
+        {paper.doi && (
+          <p className="paper-doi">
+            <a href={paper.doi} target="_blank" rel="noopener">
+              DOI {doiLabel(paper.doi)} ↗
+            </a>
+          </p>
+        )}
       </header>
       <div className="wrap" style={{ maxWidth: "var(--reading-width)" }}><StarRule /></div>
       <div className="essay-body" style={{ marginTop: 48 }}>

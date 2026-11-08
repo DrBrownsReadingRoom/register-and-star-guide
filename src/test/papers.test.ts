@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { PAPERS, paperForEssay, paperHref, papersForEssay, type Paper } from "@/content/papers";
+import { PAPERS, doiLabel, findPaper, paperForEssay, paperHref, papersForEssay, type Paper } from "@/content/papers";
 import library from "@/content/library/papers.json";
 
 const base = { no: "001", slug: "t", title: "T", abstract: "A", date: "2026-10-01" };
@@ -21,6 +21,14 @@ describe("papers", () => {
     expect(paperHref({ ...base, url: "https://philpapers.org/x", pdf: "/papers/t.pdf" })).toBe("https://philpapers.org/x");
     expect(paperHref({ ...base, pdf: "/papers/t.pdf" } as Paper)).toBe("/papers/t.pdf");
     expect(paperHref(base as Paper)).toBe("/papers/t");
+  });
+
+  it("carries the Zenodo DOIs David registered, on papers 17, 19 and 21 only", () => {
+    expect(PAPERS.filter((p) => p.doi).map((p) => p.no)).toEqual(["017", "019", "021"]);
+    expect(findPaper("the-candle-and-the-bonfire")?.doi).toBe("https://doi.org/10.5281/zenodo.24056631");
+    expect(findPaper("the-density-dial")?.doi).toBe("https://doi.org/10.5281/zenodo.24021491");
+    expect(findPaper("danger-lurks-in-empty-spaces")?.doi).toBe("https://doi.org/10.5281/zenodo.24021618");
+    expect(doiLabel("https://doi.org/10.5281/zenodo.24056631")).toBe("10.5281/zenodo.24056631");
   });
 
   it("links an essay to every paper that backs it", () => {

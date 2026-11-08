@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PAPERS, isOutside, paperHref, type Paper } from "@/content/papers";
+import { PAPERS, doiLabel, isOutside, paperHref, type Paper } from "@/content/papers";
 import { fmtMonth } from "@/content/essays";
 
 export const Route = createFileRoute("/papers/")({
@@ -33,6 +33,11 @@ function PaperRow({ p }: { p: Paper }) {
         <p className="ex">{p.abstract}</p>
         <div className="links">
           {open(outside ? "Read the paper ↗" : "Read the paper →")}
+          {p.doi && (
+            <a href={p.doi} {...ext} className="doi">
+              DOI {doiLabel(p.doi)} ↗
+            </a>
+          )}
           {essays.length === 1 && <Link to="/essays/$slug" params={{ slug: essays[0]! }}>The short version →</Link>}
           {essays.length > 1 && (
             <Link to="/papers/$slug" params={{ slug: p.slug }} hash="short-versions">

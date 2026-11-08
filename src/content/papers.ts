@@ -16,6 +16,8 @@ export interface Paper {
   readingMinutes?: number;
   /** An outside host such as PhilPapers. */
   url?: string;
+  /** A registered DOI, e.g. a Zenodo record. Shown beside the paper. */
+  doi?: string;
   /** A file in /public/papers/. */
   pdf?: string;
   /** The essays that are this paper's short versions. */
@@ -232,6 +234,7 @@ export const PAPERS: Paper[] = [
     credit: "Created by David Rees Brown. Described by Claude.",
     date: LIBRARY_DATE,
     readingMinutes: 44,
+    doi: "https://doi.org/10.5281/zenodo.24056631",
     essaySlugs: ["the-candle-and-the-bonfire"],
   },
   {
@@ -255,6 +258,7 @@ export const PAPERS: Paper[] = [
     abstract: "The Candle and the Bonfire proposed a binary view of Reality: Reality is material, its first pair is matter and motion, and every material pair in nature is one thing with two faces. It counted the medium of space as matter and described a particle as that medium gathered and held where its motion is confined.",
     credit: "Created by David Rees Brown. Described by Claude.",
     note: "Companion to [Paper 17](/papers/the-candle-and-the-bonfire).",
+    doi: "https://doi.org/10.5281/zenodo.24021491",
     date: LIBRARY_DATE,
     readingMinutes: 14,
     essaySlugs: ["somebody-elses-flush"],
@@ -282,6 +286,7 @@ export const PAPERS: Paper[] = [
     credit: "Created by David Rees Brown. Described by Claude.",
     date: LIBRARY_DATE,
     readingMinutes: 40,
+    doi: "https://doi.org/10.5281/zenodo.24021618",
     essaySlugs: [],
   },
   {
@@ -299,6 +304,8 @@ export const PAPERS: Paper[] = [
 ];
 /** An outside host or a PDF if one is set; otherwise the paper's own page on this site. */
 export const paperHref = (p: Paper) => p.url ?? p.pdf ?? `/papers/${p.slug}`;
+/** The DOI without its resolver prefix, for display: "10.5281/zenodo.24056631". */
+export const doiLabel = (doi: string) => doi.replace(/^https?:\/\/doi\.org\//i, "");
 export const isOutside = (href: string) => /^https?:\/\//i.test(href) || href.endsWith(".pdf");
 
 export const findPaper = (slug: string) => PAPERS.find((p) => p.slug === slug);

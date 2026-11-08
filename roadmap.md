@@ -15,6 +15,7 @@
 - [x] The site now reads David's Substack itself (2026-10-19): a new post appears the moment he publishes and a withdrawn one disappears, with no one editing files. Filing overrides live in `src/content/essays.meta.ts`.
 
 - [x] Apply updates from Reading-Room-website.html (2026-11-06): 5 new essays (RR 095–099), Paper 022, 18 new Pensamientos (P · 159–176); full file Pensamientos (158) replaced the earlier 8.
+- [x] Add Zenodo DOIs beside the papers that have them (2026-11-08): Papers 17, 19 and 21, shown on the /papers list and each paper's own page.
 
 ## Still waiting on David
 - Real Amazon links: `SITE.amazonBook`, `SITE.amazonKindle`, `SITE.amazonAuthor` in src/config/site.ts are still placeholders.
