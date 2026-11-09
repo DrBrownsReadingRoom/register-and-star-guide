@@ -186,6 +186,11 @@ export const PENSAMIENTOS: Pensamiento[] = [
   { no: "174", text: "Where looking runs thinnest, the stories run thickest.", added: "2026-11-06", essaySlug: "why-nobody-understands-quantum" },
   { no: "175", text: "We offer rational conjecture to challenge fanciful conjecture.", added: "2026-11-06", paperSlug: "nothing-to-understand" },
   { no: "176", text: "Physics checks its numbers to twelve decimal places and never checks its nouns.", added: "2026-11-06", essaySlug: "in-all-fairness" },
+  { no: "177", text: "Physics didn’t kill philosophy. It occupied the house philosophy walked out of.", added: "2026-11-09", essaySlug: "physics-didnt-do-it" },
+  { no: "178", text: "In our national elections, we’re not voting on the direction of the nation. We’re voting on control of the Money.", added: "2026-11-09", essaySlug: "its-not-the-economy-stupid-its-the-money" },
+  { no: "179", text: "Subjectivity is the name of the game. Objectivity is the goal.", added: "2026-11-09" },
+  { no: "180", text: "Lives are never wasted. They’re always fully used.", added: "2026-11-09" },
+  { no: "181", text: "Change is the constant. Form is the variable.", added: "2026-11-09", essaySlug: "nobody-chose-the-serpent" },
 ];
 
 /** One-based day of year, using UTC so every visitor sees the same line. */

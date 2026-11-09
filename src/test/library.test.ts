@@ -27,8 +27,8 @@ describe("David's collection on the site", () => {
   const bySlug = new Map(all.map((e) => [e.slug, e]));
 
   it("contains every essay from the file: 92 numbered essays The Road So Far and Nos. 93–97 (RR 095–099)", () => {
-    expect(library).toHaveLength(98);
-    expect(all).toHaveLength(99); // plus the welcome note from Substack
+    expect(library).toHaveLength(101);
+    expect(all).toHaveLength(102); // plus the welcome note from Substack
   });
 
   it("keeps the welcome note at 001 and Too Much of a Good Thing at 002, so the file's No. n is RR n+1", () => {
@@ -64,7 +64,7 @@ describe("David's collection on the site", () => {
 
   it("numbers a brand-new Substack post after the collection", () => {
     const later = buildFullCatalogue([...FEED, post("brand-new", "Brand New", "2026-12-01")], ESSAY_META, library, DEFAULT_SHELF);
-    expect(later.find((e) => e.slug === "brand-new")?.no).toBe("100");
+    expect(later.find((e) => e.slug === "brand-new")?.no).toBe("103");
   });
 
   it("files every essay on one of the three shelves and keeps one featured piece", () => {
