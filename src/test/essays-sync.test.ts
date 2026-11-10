@@ -54,7 +54,12 @@ describe("the live catalogue read from Substack", () => {
   });
 
   it("carries the featured flag from the filing overrides only", () => {
-    expect(essays.filter((e) => e.featured).map((e) => e.slug)).toEqual(["too-much-of-a-good-thing"]);
+    const withFeatured = buildCatalogue([
+      ...parseFeed(FEED),
+      { slug: "back-to-earth", title: "Back to Earth", date: "2026-11-10", url: "https://davidrbrown1.substack.com/p/back-to-earth", description: "", html: "<p>Back to Earth.</p>" },
+    ], ESSAY_META, DEFAULT_SHELF);
+    expect(withFeatured.filter((e) => e.featured).map((e) => e.slug)).toEqual(["back-to-earth"]);
+    expect(essays.find((e) => e.slug === "too-much-of-a-good-thing")?.featured).toBeFalsy();
   });
 });
 

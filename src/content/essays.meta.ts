@@ -13,6 +13,9 @@ import type { EssayMeta } from "@/lib/essays.sync";
  * here is how it gets tidied up afterwards.
  */
 export const ESSAY_META: Record<string, EssayMeta> = {
+  "back-to-earth": {
+    featured: true,
+  },
   "too-much-of-a-good-thing": {
     no: "002",
     shelf: "reflections",
@@ -20,7 +23,6 @@ export const ESSAY_META: Record<string, EssayMeta> = {
     excerpt:
       "A legal framework built for scarce information now shields an ecosystem that drowns us in it. Speech without accountability, amplification instead of discourse.",
     readingMinutes: 4,
-    featured: true,
     plateArt: "waves",
     plate: "Waves breaking, one by one.",
     related: ["welcome-to-the-reading-room"],

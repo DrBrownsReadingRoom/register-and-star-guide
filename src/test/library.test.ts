@@ -69,6 +69,6 @@ describe("David's collection on the site", () => {
 
   it("files every essay on one of the three shelves and keeps one featured piece", () => {
     for (const e of all) expect(["science", "philosophy", "reflections"]).toContain(e.shelf);
-    expect(all.filter((e) => e.featured).map((e) => e.slug)).toEqual(["too-much-of-a-good-thing"]);
+    expect(all.filter((e) => e.featured).map((e) => e.slug)).toEqual(["back-to-earth"]);
   });
 });
