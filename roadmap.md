@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Apply David's November 17 file: compare and import new/revised essays, papers and thoughts; update supplied book information and homepage links; verify collection and navigation.
+
 - [x] Link “Here’s How It Happens” from the main site's footer to its existing separate page.
 
 - [x] Import November 9 file additions: three essays (RR 100–102) and five Pensamientos (P · 177–181), preserving all existing papers, DOIs and numbering; verified in preview and 21 tests passed.
