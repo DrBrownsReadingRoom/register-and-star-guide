@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Link “Here’s How It Happens” from the main site's footer to its existing separate page.
+
 - [x] Import November 9 file additions: three essays (RR 100–102) and five Pensamientos (P · 177–181), preserving all existing papers, DOIs and numbering; verified in preview and 21 tests passed.
 
 - [x] Add every essay and paper from David's collection file (2026-11-03): 93 essays (file No. n shown as RR n+1, The Road So Far as RR 094) filed on Science/Philosophy/Reflections, 21 papers with their own reading pages, essay ↔ paper links.
