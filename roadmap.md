@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Apply David's November 17 file: compare and import new/revised essays, papers and thoughts; update supplied book information and homepage links; verify collection and navigation.
+- [x] Apply David's November 17 file: imported 12 essays, five papers (Paper 25 omitted as confirmed), 27 new thoughts and revised wording; updated four books, highlights and homepage/transcript links; verified catalogue search, essay-to-paper navigation and desktop/mobile pages; 37 tests passed.
 
 - [x] Link “Here’s How It Happens” from the main site's footer to its existing separate page.
 
@@ -25,7 +25,5 @@
 
 ## Still waiting on David
 - Real Amazon links: `SITE.amazonBook`, `SITE.amazonKindle`, `SITE.amazonAuthor` in src/config/site.ts are still placeholders.
-- A final description for the book on /books; the placeholder marker is removed while the book is in preparation.
-- Title and description for the second (in-preparation) book. Its "In the workshop" section was removed from /books on 2026-10-09 at Mia's request; re-add it to `BOOKS` in src/content/books.ts and the workshop block in src/routes/books.tsx when the details are confirmed.
 - Whether the Substack tagline "Essays on physics, power, and the money behind both. For the fans, not the players." should be used anywhere on the site.
 - Confirm the shelf filing chosen for the 93 collection essays, and whether in-text references like "No. 67" should be renumbered to match the site's RR numbers (file No. n = RR n+1).
