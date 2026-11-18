@@ -8,7 +8,7 @@ export const Route = createFileRoute("/books")({
   head: () => ({
     meta: [
       { title: "The Bindery — Books by David Rees Brown" },
-      { name: "description", content: "The Reading Room: Collected Essays, Volume One, by David Rees Brown with Claude. In preparation; subscribe on Substack for publication news." },
+      { name: "description", content: "A Shoreline Without a Chart, A Compass for the Voyage, A Binary View of Reality, and The War Without End — forthcoming books by David Rees Brown." },
       { property: "og:title", content: "The Bindery — Books by David Rees Brown" },
       { property: "og:description", content: "Collected essays from The Reading Room, in preparation. Subscribe on Substack for publication news." },
       { property: "og:type", content: "website" },
@@ -23,6 +23,11 @@ const ext = { target: "_blank", rel: "noopener" } as const;
 function BooksPage() {
   return (
     <div className="wrap">
+      <div className="page-top">
+        <p className="label gold">The Bindery</p>
+        <h1>Books</h1>
+        <p>Books are sharing devices. When enough has grown, a volume gets cut.</p>
+      </div>
       {BOOKS.map((b, i) => (
         <div key={b.title} className="bindery">
           <div className="book3d">
@@ -33,7 +38,7 @@ function BooksPage() {
               ) : (
                 <div className="cover">
                   <Emblem className="h-[54px] w-16" />
-                  <div><div className="ti">{b.title}</div><div className="su">{b.subtitle.replace(", ", " · ")}</div></div>
+                  <div><div className="ti">{b.title}</div></div>
                   <div className="au">DAVID REES BROWN<i>with Claude</i></div>
                 </div>
               )}
@@ -41,14 +46,14 @@ function BooksPage() {
             </div>
           </div>
           <div className="book-info">
-            <p className="label gold">The Bindery · {canPurchaseBook(b) ? "Now on Amazon" : "In preparation"}</p>
-            {i === 0 ? <h1>{b.title}</h1> : <h2 className="text-[48px] font-medium">{b.title}</h2>}
+            <p className="label gold">The Bindery · {canPurchaseBook(b) ? "Now on Amazon" : b.statusLabel ?? "In preparation"}</p>
+            <h2 className="text-[36px] font-medium sm:text-[48px]">{b.title}</h2>
             <p className="su">{b.subtitle}</p>
             <p className="desc">{b.description}</p>
             <dl className="specs">
-              <div><dt>Formats</dt><dd>{b.formats.join(" · ")}</dd></div>
-              <div><dt>{canPurchaseBook(b) ? "Published" : "Status"}</dt><dd className="tnum">{canPurchaseBook(b) ? b.year : "In preparation"}</dd></div>
-              <div><dt>Publisher</dt><dd>{b.publisher}</dd></div>
+              {b.formats.length > 0 && <div><dt>Formats</dt><dd>{b.formats.join(" · ")}</dd></div>}
+              <div><dt>{canPurchaseBook(b) ? "Published" : "Status"}</dt><dd className="tnum">{canPurchaseBook(b) ? b.year : b.statusLabel ?? "In preparation"}</dd></div>
+              {b.publisher && <div><dt>Publisher</dt><dd>{b.publisher}</dd></div>}
             </dl>
             <div className="actions">
               {canPurchaseBook(b) && b.amazonUrl && <a href={b.amazonUrl} {...ext} className="btn btn-primary">Buy on Amazon <span aria-hidden="true">↗</span></a>}

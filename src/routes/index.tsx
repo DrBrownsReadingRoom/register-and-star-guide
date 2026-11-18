@@ -9,6 +9,7 @@ import { Star } from "@/components/site/Marks";
 import { Sky } from "@/components/site/Sky";
 import { populatedShelves } from "@/lib/site-presentation";
 import { PensamientoBand } from "@/components/site/PensamientoBand";
+import { HIGHLIGHTS } from "@/content/highlights";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -68,11 +69,15 @@ function Index() {
             <p className="eyebrow"><i />Science · Philosophy · Reflections</p>
             <h1>A private corner of the <em>Library</em></h1>
             <p className="lede">For curious minds and unconventional questions.</p>
-            <p className="motto">We're storytellers, not scientists. These are ideas, not facts.</p>
+             <p className="motto">We're storytellers, not scientists. These are ideas, not facts. If they are facts, we can't prove it.</p>
             <div className="actions">
               <Link to="/essays" className="btn btn-primary">Enter the Room <span className="arr" aria-hidden="true">→</span></Link>
               <a href={SITE.substack} {...ext} className="btn btn-ghost">Read on Substack <span aria-hidden="true">↗</span></a>
             </div>
+             <div className="actions">
+               <a href="/heres-how-it-happens.html" className="btn btn-ghost">Here’s How It Happens <span aria-hidden="true">→</span></a>
+               <Link to="/essays/$slug" params={{ slug: "the-road-so-far" }} className="btn btn-ghost">The Road So Far <span aria-hidden="true">→</span></Link>
+             </div>
           </div>
         </div>
       </div>
@@ -96,6 +101,27 @@ function Index() {
       </section>
 
       <PensamientoBand initialDate={date} />
+
+      <section className="sec wrap" aria-labelledby="highlights-h">
+        <div className="sec-head">
+          <p className="label gold">Highlights</p>
+          <h2 id="highlights-h">Nine doors into the Reading Room</h2>
+          <p>New here? Nine doors into the Reading Room, one for each of its main themes. Start anywhere.</p>
+          <p>Science is always a developing, provisional template on the surface of Reality.</p>
+          <p><em>Our papers and essays are somewhat akin to messages in a bottle. If you find one on a beach, we hope you enjoy reading it.</em></p>
+        </div>
+        <ol className="ledger">
+          {HIGHLIGHTS.map((entry) => (
+            <li key={entry.slug} className="row">
+              <div className="min-w-0">
+                <p className="label gold">{entry.label}</p>
+                <h3 className="row-title"><Link to="/essays/$slug" params={{ slug: entry.slug }}>{entry.title}</Link></h3>
+                <p className="ex">{entry.excerpt}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
 
       <section className="shelves-band" aria-labelledby="shelves-h">
         <div className="wrap sec" style={{ paddingBottom: "clamp(80px,10vw,120px)" }}>

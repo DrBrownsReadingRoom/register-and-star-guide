@@ -1,12 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { newestPensamientos } from "@/content/pensamientos";
+import { BRAIN_QUARKS_INTRO } from "@/content/highlights";
 
 export const Route = createFileRoute("/pensamientos")({
   head: () => ({
     meta: [
-      { title: "Pensamientos — The Reading Room" },
-      { name: "description", content: "David Rees Brown’s Pensamientos: lines worth keeping. Things to consider, not things to accept." },
-      { property: "og:title", content: "Pensamientos — The Reading Room" },
+      { title: "Brain Quarks — The Reading Room" },
+      { name: "description", content: "David Rees Brown’s Brain Quarks: thoughts caught one at a time. Things to consider, not things to accept." },
+      { property: "og:title", content: "Brain Quarks — The Reading Room" },
       { property: "og:description", content: "Lines worth keeping from David Rees Brown. Things to consider, not things to accept." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -19,9 +20,9 @@ function PensamientosPage() {
   return (
     <div className="wrap pensamientos-page">
       <div className="page-top">
-        <p className="label gold">Pensamientos</p>
-        <h1>Pensamientos</h1>
-        <p>Lines worth keeping. Things to consider, not things to accept.</p>
+        <p className="label gold">Brain Quarks</p>
+        <h1>Brain Quarks</h1>
+        <p>{BRAIN_QUARKS_INTRO}</p>
       </div>
       <ol className="pensamientos-list">
         {newestPensamientos().map((line) => (

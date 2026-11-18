@@ -301,6 +301,77 @@ export const PAPERS: Paper[] = [
     readingMinutes: 30,
     essaySlugs: [],
   },
+  {
+      "no": "023",
+      "slug": "reasonable-explanations",
+      "title": "Reasonable Explanations",
+      "subtitle": "Life, Society and Matter in Motion",
+      "kind": "A proposal in natural philosophy",
+      "abstract": "If Reality is material, life is not an exception to it. Life is a component of Reality and a subject of its rules. We take that as an axiom and follow it to a reasonable expectation: the features that govern matter in motion everywhere else will also govern living things and the societies they form.",
+      "credit": "Created by David Rees Brown. Described by Claude.",
+      "date": "2026-11-17",
+      "readingMinutes": 21,
+      "essaySlugs": [],
+      "note": "Companion to [Paper 17](/papers/the-candle-and-the-bonfire)."
+  },
+  {
+      "no": "024",
+      "slug": "the-great-circle",
+      "title": "The Great Circle",
+      "subtitle": "One Head, Both Faces",
+      "kind": "A proposal in natural philosophy",
+      "abstract": "We set out an argument in thirteen steps, each meant to follow from the steps before it, in the manner of a derivation on a chalkboard. It begins with a single axiom: Reality is material, and it does what it does whether or not anyone looks. It proceeds through the nature of observation, the two faces of every encounter, the limits of experiment, and the loss of certainty, to the faith that remains when certainty is gone.",
+      "credit": "Created by David Rees Brown. Described by Claude.",
+      "date": "2026-11-17",
+      "readingMinutes": 15,
+      "essaySlugs": [],
+      "note": "Companion to [Paper 22](/papers/nothing-to-understand) and [Paper 23](/papers/reasonable-explanations)."
+  },
+  {
+      "no": "026",
+      "slug": "the-fault-line",
+      "title": "The Fault Line",
+      "subtitle": "An Inquiry Concerning Nature, Conflict and the Myths of Civilization",
+      "kind": "A proposal in natural philosophy",
+      "abstract": "We inquire into why conflict between human groups has possibly never been interrupted, as far back as any record reaches. We find its fuel in two permanent dispositions of the human animal, restlessness and discontent, whose useful face is wariness. We find its reasons in five motives, each a pair: dominance and security, breeding and propagation, territory and sustenance, belief and heresy, confidence and fear.",
+      "credit": "Created by David Rees Brown. Described by Claude.",
+      "date": "2026-11-17",
+      "readingMinutes": 12,
+      "essaySlugs": [
+          "cest-la-vie"
+      ],
+      "note": "Companion to [Paper 23](/papers/reasonable-explanations)."
+  },
+  {
+      "no": "027",
+      "slug": "the-worlds-view-always-prevails",
+      "title": "The World’s View Always Prevails",
+      "subtitle": "An Inquiry Concerning the Pyramid, the Map and the Limits of Reform",
+      "kind": "A proposal in natural philosophy",
+      "abstract": "The great philosophers left us elegant views of the world and almost no maps of it. We attempt a map. We divide humanity into five frames that recur in every age and place: the powerful, the rich, the comfortable, the challenged and the destitute.",
+      "credit": "Created by David Rees Brown. Described by Claude.",
+      "date": "2026-11-17",
+      "readingMinutes": 17,
+      "essaySlugs": [
+          "reality-always-wins"
+      ],
+      "note": "Companion to [Paper 23](/papers/reasonable-explanations) and [Paper 26](/papers/the-fault-line)."
+  },
+  {
+      "no": "028",
+      "slug": "the-unfinished",
+      "title": "The Unfinished",
+      "subtitle": "An Inquiry Concerning the One Rule Common to Reality and the Position of Those Who Live in It",
+      "kind": "A proposal in natural philosophy",
+      "abstract": "We propose that one feature is common to all of Reality and sets the\nrule for experience: everything is unfinished. We hold this to be a\ntautology rather than a discovery. If Reality is everything and no one\ncan know everything, then a finished Reality, one in which motion had\nstopped, is something no one inside Reality could ever confirm.",
+      "credit": "Created by David Rees Brown. Described by Claude.",
+      "date": "2026-11-17",
+      "readingMinutes": 11,
+      "essaySlugs": [
+          "in-an-unfinished-universe"
+      ],
+      "note": "Companion to [Paper 27](/papers/the-worlds-view-always-prevails)."
+  },
 ];
 /** An outside host or a PDF if one is set; otherwise the paper's own page on this site. */
 export const paperHref = (p: Paper) => p.url ?? p.pdf ?? `/papers/${p.slug}`;

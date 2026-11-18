@@ -5,9 +5,9 @@ import library from "@/content/library/papers.json";
 const base = { no: "001", slug: "t", title: "T", abstract: "A", date: "2026-10-01" };
 
 describe("papers", () => {
-  it("holds all 22 papers from David's collection, numbered 001 to 022", () => {
-    expect(PAPERS).toHaveLength(22);
-    expect(PAPERS.map((p) => p.no)).toEqual(Array.from({ length: 22 }, (_, i) => String(i + 1).padStart(3, "0")));
+  it("holds all 27 supplied papers, preserving the missing Paper 25", () => {
+    expect(PAPERS).toHaveLength(27);
+    expect(PAPERS.map((p) => p.no)).toEqual(Array.from({ length: 28 }, (_, i) => String(i + 1).padStart(3, "0")).filter((no) => no !== "025"));
     expect(PAPERS[0]!.title).toBe("Reality Exists, Knowledge Is Authored");
     expect(PAPERS[21]!.title).toBe("Nothing to Understand");
   });

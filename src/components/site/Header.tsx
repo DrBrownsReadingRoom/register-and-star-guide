@@ -11,7 +11,7 @@ const NAV: NavItem[] = [
   { label: "Essays", to: "/essays", exact: true },
   // Hidden until the first paper arrives.
   ...(PAPERS.length > 0 ? [{ label: "Papers", to: "/papers" } as NavItem] : []),
-  { label: "Pensamientos", to: "/pensamientos" },
+  { label: "Brain Quarks", to: "/pensamientos" },
   { label: "Books", to: "/books" },
   { label: "About David", to: "/about" },
 ];

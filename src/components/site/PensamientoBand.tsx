@@ -22,7 +22,7 @@ export function PensamientoBand({ initialDate }: { initialDate: string }) {
     <section className="pensamiento-band" aria-labelledby="pensamiento-label">
       <div className="wrap pensamiento-band-in">
         <div>
-          <h2 id="pensamiento-label" className="label gold">Pensamientos</h2>
+          <h2 id="pensamiento-label" className="label gold">Brain Quarks · Thought for the day</h2>
           <p className="pensamiento-no tnum">P · {line.no}</p>
         </div>
         <p className="pensamiento-daily">{line.text}</p>

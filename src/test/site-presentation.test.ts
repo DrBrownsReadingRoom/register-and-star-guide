@@ -6,7 +6,7 @@ import { canPurchaseBook, populatedShelves } from "@/lib/site-presentation";
 describe("publication and shelf availability", () => {
   it("keeps the unpublished book in preparation and unavailable for purchase", () => {
     expect(BOOKS[0]?.status).toBe("in-preparation");
-    expect(BOOKS.map(canPurchaseBook)).toEqual([false]);
+    expect(BOOKS.map(canPurchaseBook)).toEqual([false, false, false, false]);
     const book = BOOKS[0];
     if (!book) throw new Error("Expected the Reading Room book");
     expect(canPurchaseBook({ ...book, status: "available" })).toBe(true);
