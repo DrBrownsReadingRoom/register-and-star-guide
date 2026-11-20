@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Apply David's November 20 file: three essays (RR 115–117), Papers 29–30, six Brain Quarks (P · 209–214) and two wording fixes; 42 tests passed.
+
 - [x] Apply David's November 17 file: imported 12 essays, five papers (Paper 25 omitted as confirmed), 27 new thoughts and revised wording; updated four books, highlights and homepage/transcript links; verified catalogue search, essay-to-paper navigation and desktop/mobile pages; 37 tests passed.
 
 - [x] Link “Here’s How It Happens” from the main site's footer to its existing separate page.

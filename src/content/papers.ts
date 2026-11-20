@@ -372,6 +372,36 @@ export const PAPERS: Paper[] = [
       ],
       "note": "Companion to [Paper 27](/papers/the-worlds-view-always-prevails)."
   },
+  {
+      "no": "029",
+      "slug": "three-realms-without-escape",
+      "title": "Three Realms Without Escape",
+      "subtitle": "An Interpretation of Existential Balance",
+      "kind": "A proposal in natural philosophy",
+      "abstract": "We offer an interpretation of the human situation built on three realms: Space, Life and Society. Each is described by what it is to anyone who lives in it. Space is a place unsafe for further habitation: cold, dark and fatal.",
+      "credit": "Created by David Rees Brown. Described by Claude.",
+      "date": "2026-11-20",
+      "readingMinutes": 18,
+      "essaySlugs": [
+          "this-is-our-reality-like-it-or-not"
+      ],
+      "note": "Companion to [Paper 28](/papers/the-unfinished) and to essays No. 108 to [No. 113](/essays/who-are-we-kidding)."
+  },
+  {
+      "no": "030",
+      "slug": "form-and-understanding",
+      "title": "Form and Understanding",
+      "subtitle": "An Ontology of the Outer and Inner Universes",
+      "kind": "A proposal in natural philosophy",
+      "abstract": "We propose an ontology of two kinds of being. The first is form: what exists independently of any knower. The second is understanding: what exists only where it is recorded and read.",
+      "credit": "Created by David Rees Brown. Described by Claude.",
+      "date": "2026-11-20",
+      "readingMinutes": 11,
+      "essaySlugs": [
+          "the-great-escape"
+      ],
+      "note": "Companion to [Paper 29](/papers/three-realms-without-escape)."
+  },
 ];
 /** An outside host or a PDF if one is set; otherwise the paper's own page on this site. */
 export const paperHref = (p: Paper) => p.url ?? p.pdf ?? `/papers/${p.slug}`;

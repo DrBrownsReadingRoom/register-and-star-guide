@@ -218,6 +218,12 @@ export const PENSAMIENTOS: Pensamiento[] = [
   {"no": "206", "text": "Set sail from Newport bound for Kinsale with one degree of compass error, and you’ll never reach your destination.", "added": "2026-11-17", "essaySlug": "by-definition"},
   {"no": "207", "text": "A finite speed is the signature of a medium. Nothing can’t slow anything down.", "added": "2026-11-17", "essaySlug": "by-definition"},
   {"no": "208", "text": "We are enveloped in an immensity we can never comprehend, and draw on the cave wall to simulate control. Self-protection makes the drawings look real.", "added": "2026-11-17", "essaySlug": "where-is-we"},
+  {"no": "209", "text": "The bubbles are the legacy of an errant brain nodule nobody really needed and certainly will not survive.", "added": "2026-11-20", "essaySlug": "who-are-we-kidding"},
+  {"no": "210", "text": "Our questions are the same as yours and we all have trouble with the answers.", "added": "2026-11-20"},
+  {"no": "211", "text": "We actually love the chase until the cliff appears.", "added": "2026-11-20", "essaySlug": "this-is-our-reality-like-it-or-not"},
+  {"no": "212", "text": "This is our reality . . . like it or not.", "added": "2026-11-20", "essaySlug": "this-is-our-reality-like-it-or-not"},
+  {"no": "213", "text": "“Should” is a risky word in any language.", "added": "2026-11-20"},
+  {"no": "214", "text": "Acceptable risk is a good place to start.", "added": "2026-11-20"},
 ];
 
 /** One-based day of year, using UTC so every visitor sees the same line. */

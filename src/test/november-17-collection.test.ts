@@ -7,7 +7,7 @@ import { BOOKS } from "@/content/books";
 
 describe("David's November 17 additions", () => {
   it("adds twelve essays without changing existing accession numbers", () => {
-    expect(library.filter((e) => Number(e.no) >= 103).map((e) => e.no)).toEqual(
+    expect(library.filter((e) => Number(e.no) >= 103 && Number(e.no) <= 114).map((e) => e.no)).toEqual(
       Array.from({ length: 12 }, (_, i) => String(i + 103)),
     );
     expect(library.find((e) => e.slug === "back-to-earth")?.no).toBe("092");
@@ -16,7 +16,7 @@ describe("David's November 17 additions", () => {
 
   it("keeps Paper 25 omitted, as David confirmed", () => {
     expect(PAPERS.find((p) => p.no === "025")).toBeUndefined();
-    expect(PAPERS.filter((p) => Number(p.no) > 22).map((p) => p.no)).toEqual(["023", "024", "026", "027", "028"]);
+    expect(PAPERS.filter((p) => Number(p.no) > 22 && Number(p.no) <= 28).map((p) => p.no)).toEqual(["023", "024", "026", "027", "028"]);
   });
 
   it("connects the new arguments to their short versions", () => {
@@ -28,7 +28,7 @@ describe("David's November 17 additions", () => {
   it("adds 27 unique thoughts with valid source essays", () => {
     const added = PENSAMIENTOS.filter((p) => p.added === "2026-11-17");
     expect(added).toHaveLength(27);
-    expect(new Set(PENSAMIENTOS.map((p) => p.text)).size).toBe(208);
+    expect(new Set(PENSAMIENTOS.map((p) => p.text)).size).toBe(214);
     for (const line of added) {
       if (line.essaySlug) expect(library.some((e) => e.slug === line.essaySlug)).toBe(true);
     }
